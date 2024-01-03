@@ -15,7 +15,7 @@ struct ApiItemModel: Codable {
     let name: String // 요청코드 ex) 미국(USD/KRW)
     let date: String // 갱신 날짜 ex) 2024-01-02
     let time: String // 갱신 시간 ex) 21:03:32
-    let recurrence: Int
+    let recurrenceCount: Int
     let basePrice: Double // 매매 기준율 ex) 1310.00
     let openingPrice: Double // ex) 1289.40
     let highPrice: Double // ex) 1310.00
@@ -26,9 +26,21 @@ struct ApiItemModel: Codable {
     let cashSellingPrice: Double // 판매시 가격 ex) 1287.08
     let ttBuyingPrice: Double // 전신환매입율(손님이 해외송금 받을 때 가격) ex) 1297.20
     let ttSellingPrice: Double // 전신환매도율(손님이 해외송금 보낼 때 가격) ex) 1322.80
+    let tcBuyingPrice: Double?
+    let fcSellingPrice: Double?
+    let exchangeCommission : Double
+    let usDollarRate: Double
     let high52wPrice: Double // 52주 신고가(52주 간 최대 가격) ex) 1363.50
     let high52wDate: String // 52주 신고가 달성일(52주 간 최대 가격 달성일) ex) 2023-10-04
     let low52wPrice: Double // 52주 신저가(52주 간 최저 가격) ex) 1216.60
     let low52wDate: String // 52주 신저가 달성일(52주 간 최저 가격 달성일) ex) 2023-02-02
+    let currencyUnit: Int
+    let provider: String
+    let timestamp: Int
+    let id: Int
+    let modifiedAt: String
+    let createdAt: String
+    let changeRate: Double
     let signedChangeRate: Double // 부호 있는 가격변동율 ex) 0.008468023 x 100 해줘야 함.
+    let signedChangePrice: Double
 }
