@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94D4A1E575CF3B520105EE32 /* Pods_BakkwojwoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B78BB63CEE4A27E932B2B84 /* Pods_BakkwojwoTests.framework */; };
+		9E6FB2942B4430490021D53C /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6FB2932B4430490021D53C /* CountryModel.swift */; };
+		9E6FB2962B44391A0021D53C /* ApiItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6FB2952B44391A0021D53C /* ApiItemModel.swift */; };
 		9EBE50E82B42C9B7001B534E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE50E72B42C9B7001B534E /* AppDelegate.swift */; };
 		9EBE50EA2B42C9B7001B534E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE50E92B42C9B7001B534E /* SceneDelegate.swift */; };
 		9EBE50EC2B42C9B7001B534E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE50EB2B42C9B7001B534E /* ViewController.swift */; };
-		9EBE50EF2B42C9B7001B534E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EBE50ED2B42C9B7001B534E /* Main.storyboard */; };
 		9EBE50F12B42C9B8001B534E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EBE50F02B42C9B8001B534E /* Assets.xcassets */; };
 		9EBE50F42B42C9B8001B534E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EBE50F22B42C9B8001B534E /* LaunchScreen.storyboard */; };
 		9EBE50FF2B42C9B8001B534E /* BakkwojwoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE50FE2B42C9B8001B534E /* BakkwojwoTests.swift */; };
 		9EBE51092B42C9B8001B534E /* BakkwojwoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE51082B42C9B8001B534E /* BakkwojwoUITests.swift */; };
 		9EBE510B2B42C9B8001B534E /* BakkwojwoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE510A2B42C9B8001B534E /* BakkwojwoUITestsLaunchTests.swift */; };
+		9ECE40E22B4552800048F4F3 /* BaseUI_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE40E12B4552800048F4F3 /* BaseUI_ViewController.swift */; };
+		C9E449C79842DE0DC5BA702B /* Pods_Bakkwojwo_BakkwojwoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EEEFEC1260CA93803619E6 /* Pods_Bakkwojwo_BakkwojwoUITests.framework */; };
+		DB7F192E76BF3DA44EAE7373 /* Pods_Bakkwojwo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A2026FC336E8E4C0FA72B5 /* Pods_Bakkwojwo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +41,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4439CA40438458C96014C692 /* Pods-Bakkwojwo-BakkwojwoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bakkwojwo-BakkwojwoUITests.release.xcconfig"; path = "Target Support Files/Pods-Bakkwojwo-BakkwojwoUITests/Pods-Bakkwojwo-BakkwojwoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		48A2026FC336E8E4C0FA72B5 /* Pods_Bakkwojwo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bakkwojwo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B78BB63CEE4A27E932B2B84 /* Pods_BakkwojwoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BakkwojwoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BB44EE4870B994D1E62BF4A /* Pods-Bakkwojwo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bakkwojwo.release.xcconfig"; path = "Target Support Files/Pods-Bakkwojwo/Pods-Bakkwojwo.release.xcconfig"; sourceTree = "<group>"; };
+		756E01A9B359AAA020B9EA6B /* Pods-BakkwojwoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BakkwojwoTests.release.xcconfig"; path = "Target Support Files/Pods-BakkwojwoTests/Pods-BakkwojwoTests.release.xcconfig"; sourceTree = "<group>"; };
+		96EEEFEC1260CA93803619E6 /* Pods_Bakkwojwo_BakkwojwoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bakkwojwo_BakkwojwoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E6FB2932B4430490021D53C /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		9E6FB2952B44391A0021D53C /* ApiItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiItemModel.swift; sourceTree = "<group>"; };
 		9EBE50E42B42C9B7001B534E /* Bakkwojwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bakkwojwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EBE50E72B42C9B7001B534E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EBE50E92B42C9B7001B534E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EBE50EB2B42C9B7001B534E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9EBE50EE2B42C9B7001B534E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9EBE50F02B42C9B8001B534E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EBE50F32B42C9B8001B534E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EBE50F52B42C9B8001B534E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +61,10 @@
 		9EBE51042B42C9B8001B534E /* BakkwojwoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BakkwojwoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EBE51082B42C9B8001B534E /* BakkwojwoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakkwojwoUITests.swift; sourceTree = "<group>"; };
 		9EBE510A2B42C9B8001B534E /* BakkwojwoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakkwojwoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9ECE40E12B4552800048F4F3 /* BaseUI_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUI_ViewController.swift; sourceTree = "<group>"; };
+		BFF4530C4D2F243E9635374E /* Pods-Bakkwojwo-BakkwojwoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bakkwojwo-BakkwojwoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bakkwojwo-BakkwojwoUITests/Pods-Bakkwojwo-BakkwojwoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C38B8F904FB88F896C5F7B90 /* Pods-Bakkwojwo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bakkwojwo.debug.xcconfig"; path = "Target Support Files/Pods-Bakkwojwo/Pods-Bakkwojwo.debug.xcconfig"; sourceTree = "<group>"; };
+		DE0C612159C5BA80ECFFD397 /* Pods-BakkwojwoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BakkwojwoTests.debug.xcconfig"; path = "Target Support Files/Pods-BakkwojwoTests/Pods-BakkwojwoTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7F192E76BF3DA44EAE7373 /* Pods_Bakkwojwo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D4A1E575CF3B520105EE32 /* Pods_BakkwojwoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +88,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E449C79842DE0DC5BA702B /* Pods_Bakkwojwo_BakkwojwoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D5238DC15B3C82A08027AF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C38B8F904FB88F896C5F7B90 /* Pods-Bakkwojwo.debug.xcconfig */,
+				4BB44EE4870B994D1E62BF4A /* Pods-Bakkwojwo.release.xcconfig */,
+				BFF4530C4D2F243E9635374E /* Pods-Bakkwojwo-BakkwojwoUITests.debug.xcconfig */,
+				4439CA40438458C96014C692 /* Pods-Bakkwojwo-BakkwojwoUITests.release.xcconfig */,
+				DE0C612159C5BA80ECFFD397 /* Pods-BakkwojwoTests.debug.xcconfig */,
+				756E01A9B359AAA020B9EA6B /* Pods-BakkwojwoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9E6FB2912B44300A0021D53C /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		9E6FB2922B4430190021D53C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9E6FB2932B4430490021D53C /* CountryModel.swift */,
+				9E6FB2952B44391A0021D53C /* ApiItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9EBE50DB2B42C9B7001B534E = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +131,8 @@
 				9EBE50FD2B42C9B8001B534E /* BakkwojwoTests */,
 				9EBE51072B42C9B8001B534E /* BakkwojwoUITests */,
 				9EBE50E52B42C9B7001B534E /* Products */,
+				0D5238DC15B3C82A08027AF0 /* Pods */,
+				DAE923A4453BDDE26AE754E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,10 +149,12 @@
 		9EBE50E62B42C9B7001B534E /* Bakkwojwo */ = {
 			isa = PBXGroup;
 			children = (
+				9ECE40DF2B4552320048F4F3 /* Configuration */,
+				9E6FB2912B44300A0021D53C /* API */,
+				9E6FB2922B4430190021D53C /* Model */,
 				9EBE50E72B42C9B7001B534E /* AppDelegate.swift */,
 				9EBE50E92B42C9B7001B534E /* SceneDelegate.swift */,
 				9EBE50EB2B42C9B7001B534E /* ViewController.swift */,
-				9EBE50ED2B42C9B7001B534E /* Main.storyboard */,
 				9EBE50F02B42C9B8001B534E /* Assets.xcassets */,
 				9EBE50F22B42C9B8001B534E /* LaunchScreen.storyboard */,
 				9EBE50F52B42C9B8001B534E /* Info.plist */,
@@ -127,6 +179,32 @@
 			path = BakkwojwoUITests;
 			sourceTree = "<group>";
 		};
+		9ECE40DF2B4552320048F4F3 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE40E02B45525A0048F4F3 /* BaseUI */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		9ECE40E02B45525A0048F4F3 /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				9ECE40E12B4552800048F4F3 /* BaseUI_ViewController.swift */,
+			);
+			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		DAE923A4453BDDE26AE754E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48A2026FC336E8E4C0FA72B5 /* Pods_Bakkwojwo.framework */,
+				96EEEFEC1260CA93803619E6 /* Pods_Bakkwojwo_BakkwojwoUITests.framework */,
+				4B78BB63CEE4A27E932B2B84 /* Pods_BakkwojwoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EBE510E2B42C9B8001B534E /* Build configuration list for PBXNativeTarget "Bakkwojwo" */;
 			buildPhases = (
+				0A289C600B2BD5ACD8F6DB86 /* [CP] Check Pods Manifest.lock */,
 				9EBE50E02B42C9B7001B534E /* Sources */,
 				9EBE50E12B42C9B7001B534E /* Frameworks */,
 				9EBE50E22B42C9B7001B534E /* Resources */,
+				4CF60F9E9287319B52D71517 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EBE51112B42C9B8001B534E /* Build configuration list for PBXNativeTarget "BakkwojwoTests" */;
 			buildPhases = (
+				5FA709B865D50C839AC31F1E /* [CP] Check Pods Manifest.lock */,
 				9EBE50F62B42C9B8001B534E /* Sources */,
 				9EBE50F72B42C9B8001B534E /* Frameworks */,
 				9EBE50F82B42C9B8001B534E /* Resources */,
@@ -169,9 +250,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EBE51142B42C9B8001B534E /* Build configuration list for PBXNativeTarget "BakkwojwoUITests" */;
 			buildPhases = (
+				0D4BFF673A96528CAFCCB114 /* [CP] Check Pods Manifest.lock */,
 				9EBE51002B42C9B8001B534E /* Sources */,
 				9EBE51012B42C9B8001B534E /* Frameworks */,
 				9EBE51022B42C9B8001B534E /* Resources */,
+				2B505E53A05CD45968A17A36 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -233,7 +316,6 @@
 			files = (
 				9EBE50F42B42C9B8001B534E /* LaunchScreen.storyboard in Resources */,
 				9EBE50F12B42C9B8001B534E /* Assets.xcassets in Resources */,
-				9EBE50EF2B42C9B7001B534E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,14 +335,120 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A289C600B2BD5ACD8F6DB86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Bakkwojwo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0D4BFF673A96528CAFCCB114 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Bakkwojwo-BakkwojwoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B505E53A05CD45968A17A36 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo-BakkwojwoUITests/Pods-Bakkwojwo-BakkwojwoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo-BakkwojwoUITests/Pods-Bakkwojwo-BakkwojwoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo-BakkwojwoUITests/Pods-Bakkwojwo-BakkwojwoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4CF60F9E9287319B52D71517 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo/Pods-Bakkwojwo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo/Pods-Bakkwojwo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bakkwojwo/Pods-Bakkwojwo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FA709B865D50C839AC31F1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BakkwojwoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9EBE50E02B42C9B7001B534E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9EBE50EC2B42C9B7001B534E /* ViewController.swift in Sources */,
+				9ECE40E22B4552800048F4F3 /* BaseUI_ViewController.swift in Sources */,
 				9EBE50E82B42C9B7001B534E /* AppDelegate.swift in Sources */,
+				9E6FB2942B4430490021D53C /* CountryModel.swift in Sources */,
 				9EBE50EA2B42C9B7001B534E /* SceneDelegate.swift in Sources */,
+				9E6FB2962B44391A0021D53C /* ApiItemModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +485,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9EBE50ED2B42C9B7001B534E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9EBE50EE2B42C9B7001B534E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9EBE50F22B42C9B8001B534E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -432,11 +612,13 @@
 		};
 		9EBE510F2B42C9B8001B534E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C38B8F904FB88F896C5F7B90 /* Pods-Bakkwojwo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X67DB976UU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bakkwojwo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -444,6 +626,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,11 +642,13 @@
 		};
 		9EBE51102B42C9B8001B534E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BB44EE4870B994D1E62BF4A /* Pods-Bakkwojwo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X67DB976UU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bakkwojwo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -471,6 +656,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -486,6 +672,7 @@
 		};
 		9EBE51122B42C9B8001B534E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE0C612159C5BA80ECFFD397 /* Pods-BakkwojwoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -505,6 +692,7 @@
 		};
 		9EBE51132B42C9B8001B534E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 756E01A9B359AAA020B9EA6B /* Pods-BakkwojwoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -524,6 +712,7 @@
 		};
 		9EBE51152B42C9B8001B534E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFF4530C4D2F243E9635374E /* Pods-Bakkwojwo-BakkwojwoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -541,6 +730,7 @@
 		};
 		9EBE51162B42C9B8001B534E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4439CA40438458C96014C692 /* Pods-Bakkwojwo-BakkwojwoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
