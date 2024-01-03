@@ -22,6 +22,11 @@ class ExchangeRateViewController: BaseViewController{
         return label
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        APIManager().getDunamuData(codes: "FRX.KRWUSD")
+    }
+    
     override func setView() {
         self.view.backgroundColor = .white
         self.view.addSubview(self.mainTitleLabel)
