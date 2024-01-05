@@ -10,41 +10,116 @@ import SnapKit
 
 class ExchangeRateViewController: BaseViewController{
     
-    private let mainTitleLabel: BaseTitleLabel = {
-        let label = BaseTitleLabel(titleText: "국가별 환율", titleColor: .black, titleBackgroundColor: .white)
-        label.font = .mainTitle
+    let viewModel = ExchangeRateViewModel()
+    
+    private let mainSectionTitleLabel: BaseLabel = {
+        let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle!)
         return label
     }()
     
-    private let subTitleLabel: BaseTitleLabel = {
-        let label = BaseTitleLabel(titleText: "2024년 01월 03일 18:19:08 기준", titleColor: .darkGray, titleBackgroundColor: .white)
-        label.font = .subTitle
+    private let mainSectionSubTitleLabel: BaseLabel = {
+        let label = BaseLabel(text: "Loading..", textColor: .darkGray, backgroundColor: .white, font: .subTitle!)
         return label
+    }()
+    
+    private let baseCurrencySectionTitleLabel: BaseLabel = {
+        let label = BaseLabel(text: "기준 통화", textColor: .black, backgroundColor: .white, font: .h2!)
+        return label
+    }()
+    
+    private let exchangeRateSectionTitleLabel: BaseLabel = {
+        let label = BaseLabel(text: "현재 환율", textColor: .black, backgroundColor: .white, font: .h2!)
+        return label
+    }()
+    
+    private let exchangeRateSectionCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(ExchangeRateSectionCollectionViewCell.self, forCellWithReuseIdentifier: ExchangeRateSectionCollectionViewCell.registerId)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        APIManager().getDunamuData(codes: "FRX.KRWUSD")
+        self.viewModel.korDataLoad()
+        
+        self.viewModel.onUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.mainSectionSubTitleLabel.text = "\(self.viewModel.exchangeRateModel[0].date) \(self.viewModel.exchangeRateModel[0].time)"
+                self.exchangeRateSectionCollectionView.delegate = self
+                self.exchangeRateSectionCollectionView.dataSource = self
+                self.exchangeRateSectionCollectionView.reloadData()
+            }
+        }
     }
     
     override func setView() {
         self.view.backgroundColor = .white
-        self.view.addSubview(self.mainTitleLabel)
-        self.view.addSubview(self.subTitleLabel)
+        self.view.addSubview(self.mainSectionTitleLabel)
+        self.view.addSubview(self.mainSectionSubTitleLabel)
+        self.view.addSubview(self.baseCurrencySectionTitleLabel)
+        self.view.addSubview(self.exchangeRateSectionTitleLabel)
+        self.view.addSubview(self.exchangeRateSectionCollectionView)
     }
     
     override func setAutoLayout() {
-        self.mainTitleLabel.snp.makeConstraints {
+        self.mainSectionTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(65)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-200)
         }
         
-        self.subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.mainTitleLabel.snp.bottom).offset(10)
+        self.mainSectionSubTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(self.mainSectionTitleLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-100)
+        }  
+        
+        self.baseCurrencySectionTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(self.mainSectionSubTitleLabel.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-100)
+        }        
+        
+        self.exchangeRateSectionTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(self.baseCurrencySectionTitleLabel.snp.bottom).offset(100)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-100)
+        }
+        
+        self.exchangeRateSectionCollectionView.snp.makeConstraints {
+            $0.top.equalTo(self.exchangeRateSectionTitleLabel.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.bottom.equalToSuperview().offset(-30)
         }
     }
 }
 
+extension ExchangeRateViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat = collectionView.bounds.width
+        let hegiht: CGFloat = 50
+        return CGSize(width: width, height: hegiht)
+    }
+}
+
+extension ExchangeRateViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewModel.exchangeRateModel.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExchangeRateSectionCollectionViewCell.registerId, for: indexPath) as? ExchangeRateSectionCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let data = self.viewModel.exchangeRateModel[indexPath.row]
+        print(data)
+        cell.setData(data)
+        return cell
+    }
+}
