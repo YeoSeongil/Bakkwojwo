@@ -25,27 +25,23 @@ class APIManager {
         return components
     }
     
-    func getDunamuData(codes: String) {
+    func getExchangeRateData(codes: String, onCompleted: @escaping ([ExchangeRateModel]) -> Void) {
         guard let url = DunamuAPI(codes: codes).url else {
             return
         }
-        print("URL : \(url)")
         
         let session = URLSession(configuration: .default)
-        print("session : \(session)")
         session.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 return
             }
-            print(data)
-
+            
             let decoder = JSONDecoder()
-            guard let item = try? decoder.decode([ApiItemModel].self, from: data) else {
-                print("error")
+            guard let item = try? decoder.decode([ExchangeRateModel].self, from: data) else {
                 return
             }
-            print(item)
             
+            onCompleted(item)
         }.resume()
     }
 }
