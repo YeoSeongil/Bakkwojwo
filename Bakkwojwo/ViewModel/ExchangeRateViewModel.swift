@@ -25,19 +25,26 @@ class ExchangeRateViewModel {
             var model = [ExchangeRateModel]()
             
             for index in entity {
-                let item = ExchangeRateModel(country: index.country, currencyName: index.currencyName, currencyCode: index.currencyCode, basePrice: index.basePrice, changePrice: index.changePrice, signedChangeRate: index.signedChangeRate, date: index.date, time: index.time)
-                model.append(item)
+                for k in countryModelItem {
+                    if index.currencyCode == "\(k.key)" {
+                        let item = ExchangeRateModel(country: k.value.countryName, currencyName: k.value.currencyUnit, currencyCode: index.currencyCode, basePrice: index.basePrice, changePrice: index.changePrice, signedChangeRate: index.signedChangeRate, date: index.date, time: index.time)
+                        model.append(item)
+                    }
+                }
             }
             onCompleted(model)
         }
     }
     
     func korDataLoad() {
-        self.fetchData(codes: "FRX.KRWUSD,FRX.KRWCNY,FRX.KRWJPY", onCompleted: { [weak self] model in
+        let resultMap = countryNameItem.map({ String("FRX.KRW\($0)") })
+        let codes = resultMap.joined(separator: ",")
+        
+        self.fetchData(codes: codes, onCompleted: { [weak self] model in
             guard let self = self else { return }
             self.exchangeRateModel = model
-            print(self.exchangeRateModel)
         })
+        
     }
 
     func usdDataLoad() {
