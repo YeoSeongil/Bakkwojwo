@@ -25,7 +25,7 @@ class APIManager {
         return components
     }
     
-    func getExchangeRateData(codes: String, onCompleted: @escaping ([ExchangeRateModel]) -> Void) {
+    func getExchangeRateData(codes: String, onCompleted: @escaping ([ApiItemModel]) -> Void) {
         guard let url = DunamuAPI(codes: codes).url else {
             return
         }
@@ -35,12 +35,10 @@ class APIManager {
             guard let data = data, error == nil else {
                 return
             }
-            
             let decoder = JSONDecoder()
-            guard let item = try? decoder.decode([ExchangeRateModel].self, from: data) else {
+            guard let item = try? decoder.decode([ApiItemModel].self, from: data) else {
                 return
             }
-            
             onCompleted(item)
         }.resume()
     }
