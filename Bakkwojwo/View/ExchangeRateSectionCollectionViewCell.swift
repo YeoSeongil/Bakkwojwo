@@ -11,6 +11,13 @@ import SnapKit
 class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     static let registerId: String = "ExchangeRateSectionCollectionViewCell"
     
+    let flagImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     var countryLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h3!)
         return label
@@ -48,6 +55,7 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     
     private func setView() {
         self.backgroundColor = .clear
+        self.contentView.addSubview(self.flagImageView)
         self.contentView.addSubview(self.countryLabel)
         self.contentView.addSubview(self.currencyCodeNameLabel)
         self.contentView.addSubview(self.basePriceLabel)
@@ -56,39 +64,45 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setAutoLayout() {
+        self.flagImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(15)
+            $0.width.equalTo(25)
+        }
+        
         self.countryLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-250)
+            $0.leading.equalTo(self.flagImageView.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview().offset(-150)
         }
         
         self.currencyCodeNameLabel.snp.makeConstraints {
             $0.top.equalTo(self.countryLabel.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-300)
+            $0.leading.equalTo(self.flagImageView.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview().offset(-150)
         }
         
         self.basePriceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(self.countryLabel.snp.trailing).offset(100)
-            $0.trailing.equalToSuperview().offset(-100)
+            $0.leading.equalTo(self.countryLabel.snp.trailing).offset(15)
+            //$0.trailing.equalToSuperview().offset(-100)
         }
         
         self.changePriceLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.leading.equalTo(self.basePriceLabel.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-10)
         }                
         
         self.signedChangeRatePriceLabel.snp.makeConstraints {
             $0.top.equalTo(self.changePriceLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(self.basePriceLabel.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-10)
         }
 
     }
     
     func setData(_ data: ExchangeRateModel) {
+        self.flagImageView.image = UIImage(named: data.currencyCode)
         self.countryLabel.text = "\(data.country) \(data.currencyName)"
         self.currencyCodeNameLabel.text = data.currencyCode
         self.basePriceLabel.text = "\(data.basePrice)"
