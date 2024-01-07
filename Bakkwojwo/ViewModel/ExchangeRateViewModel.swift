@@ -46,12 +46,29 @@ class ExchangeRateViewModel {
         })
         
     }
-
+    
     func usdDataLoad() {
-        self.fetchData(codes: "FRX.USDJPY,FRX.USDCNY", onCompleted: { [weak self] model in
+        let resultMap = countryNameItem.map({ String("FRX.\($0)USD") })
+        let codes = resultMap.joined(separator: ",")
+        
+        self.fetchData(codes: codes, onCompleted: { [weak self] model in
             guard let self = self else { return }
             self.exchangeRateModel = model
+            
+            var model = [ExchangeRateModel]()
+            
+            let usdIndex = self.exchangeRateModel.indices.filter ({
+                self.exchangeRateModel[$0].currencyCode == "USD"
+            }).first
+            
+            self.exchangeRateModel.map {
+                if $0.currencyCode == "USD" {
+                    self.exchangeRateModel.remove(at: usdIndex!)
+                    let item = ExchangeRateModel(country: "대한민국", currencyName: "원(₩)", currencyCode: "KRW", basePrice: $0.basePrice, changePrice: $0.changePrice, signedChangeRate: $0.signedChangeRate, date: $0.date, time: $0.time)
+                    self.exchangeRateModel.insert(item, at: self.exchangeRateModel.startIndex)
+                }
+            }
         })
     }
-
+    
 }
