@@ -13,7 +13,6 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     
     let flagImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
