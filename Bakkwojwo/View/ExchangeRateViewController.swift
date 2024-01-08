@@ -12,8 +12,10 @@ class ExchangeRateViewController: BaseViewController{
     
     let viewModel = ExchangeRateViewModel()
     
+    let BaseCurrency = BaseCurrencyView()
+    
     private let mainSectionTitleLabel: BaseLabel = {
-        let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle!)
+        let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle2!)
         return label
     }()
     
@@ -45,11 +47,11 @@ class ExchangeRateViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel.korDataLoad()
-        
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.mainSectionSubTitleLabel.text = "\(self.viewModel.exchangeRateModel[0].date) \(self.viewModel.exchangeRateModel[0].time)"
+                self.BaseCurrency.delegate = self
                 self.exchangeRateSectionCollectionView.delegate = self
                 self.exchangeRateSectionCollectionView.dataSource = self
                 self.exchangeRateSectionCollectionView.reloadData()
@@ -64,6 +66,7 @@ class ExchangeRateViewController: BaseViewController{
         self.view.addSubview(self.baseCurrencySectionTitleLabel)
         self.view.addSubview(self.exchangeRateSectionTitleLabel)
         self.view.addSubview(self.exchangeRateSectionCollectionView)
+        self.view.addSubview(self.BaseCurrency)
     }
     
     override func setAutoLayout() {
@@ -74,19 +77,20 @@ class ExchangeRateViewController: BaseViewController{
         }
         
         self.mainSectionSubTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.mainSectionTitleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.mainSectionTitleLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-100)
         }  
         
-        self.baseCurrencySectionTitleLabel.snp.makeConstraints {
+        self.BaseCurrency.snp.makeConstraints {
             $0.top.equalTo(self.mainSectionSubTitleLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-100)
-        }        
+            $0.height.equalTo(100)
+        }
         
         self.exchangeRateSectionTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.baseCurrencySectionTitleLabel.snp.bottom).offset(100)
+            $0.top.equalTo(self.BaseCurrency.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-100)
         }
@@ -118,8 +122,21 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let data = self.viewModel.exchangeRateModel[indexPath.row]
-        print(data)
         cell.setData(data)
         return cell
+    }
+}
+
+extension ExchangeRateViewController: BaseCurrencyViewDelegate {    
+    func BaseCurrencySetKRWTapped() {
+        self.viewModel.korDataLoad()
+        let arr = self.viewModel.exchangeRateModel.filter {$0.currencyCode == "KRW"}
+        self.BaseCurrency.setData(arr)
+    }
+    
+    func BaseCurrencySetUSDTapped() {
+        self.viewModel.usdDataLoad()
+        let arr = self.viewModel.exchangeRateModel.filter {$0.currencyCode == "USD"}
+        self.BaseCurrency.setData(arr)
     }
 }
