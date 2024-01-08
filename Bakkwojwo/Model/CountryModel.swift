@@ -12,6 +12,8 @@ struct CountryModel: Codable {
     let currencyUnit: String
 }
 
+let countryNameItem: [String] = ["KRW", "USD", "JPY", "CNY", "EUR", "GBP", "RUB", "HKD", "THB", "TWD", "PHP", "SGD", "VND", "MYR", "MNT", "BHD", "BDT", "BND", "SAR", "LKR", "AED", "OMR", "JOD", "ILS", "INR", "IDR", "QAR", "KZT", "KWD", "PKR", "AUD", "NZD", "CAD", "MXN", "BRL", "CLP", "COP", "ZAR", "NOK", "DKK", "SEK", "CHF", "CZK", "TRY", "PLN", "HUF", "DZD", "EGP", "KES", "TZS"]
+
 let countryModelItem: [String: CountryModel] = [
     // Asia
     "KRW" : CountryModel(countryName: "대한민국", currencyUnit: "원(₩)"),
@@ -47,7 +49,7 @@ let countryModelItem: [String: CountryModel] = [
     
     // America
     "USD" : CountryModel(countryName: "미국", currencyUnit: "달러($)"),
-    "EUR" : CountryModel(countryName: "유로", currencyUnit: "유로(€)"),
+    "EUR" : CountryModel(countryName: "유럽연합", currencyUnit: "유로(€)"),
     "CAD" : CountryModel(countryName: "캐나다", currencyUnit: "달러(CAN$)"),
     "MXN" : CountryModel(countryName: "멕시코", currencyUnit: "페소(MEX$)"),
     "BRL" : CountryModel(countryName: "브라질", currencyUnit: "헤알(R$)"),
