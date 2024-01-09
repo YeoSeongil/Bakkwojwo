@@ -61,12 +61,9 @@ class ExchangeRateViewController: BaseViewController{
     
     override func setView() {
         self.view.backgroundColor = .white
-        self.view.addSubview(self.mainSectionTitleLabel)
-        self.view.addSubview(self.mainSectionSubTitleLabel)
-        self.view.addSubview(self.baseCurrencySectionTitleLabel)
-        self.view.addSubview(self.exchangeRateSectionTitleLabel)
-        self.view.addSubview(self.exchangeRateSectionCollectionView)
-        self.view.addSubview(self.BaseCurrency)
+        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionCollectionView].forEach {
+            self.view.addSubview($0)
+        }
     }
     
     override func setAutoLayout() {
