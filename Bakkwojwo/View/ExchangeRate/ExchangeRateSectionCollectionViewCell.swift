@@ -109,7 +109,7 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         self.changePriceLabel.text = "\(data.changePrice)"
         
         let roundSignedChangeRate = round(data.signedChangeRate * 100 * 100) / 100
-        self.signedChangeRatePriceLabel.text = "(\(roundSignedChangeRate))%"
+        self.signedChangeRatePriceLabel.text = "(\(roundSignedChangeRate)%)"
         self.signedChangeRatePriceLabel.textColor = roundSignedChangeRate > 0 ? .blue : .red
         
     }
