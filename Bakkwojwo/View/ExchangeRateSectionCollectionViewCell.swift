@@ -53,13 +53,9 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setView() {
-        self.backgroundColor = .clear
-        self.contentView.addSubview(self.flagImageView)
-        self.contentView.addSubview(self.countryLabel)
-        self.contentView.addSubview(self.currencyCodeNameLabel)
-        self.contentView.addSubview(self.basePriceLabel)
-        self.contentView.addSubview(self.changePriceLabel)
-        self.contentView.addSubview(self.signedChangeRatePriceLabel)
+        [self.flagImageView, self.countryLabel, self.currencyCodeNameLabel, self.basePriceLabel, self.changePriceLabel, self.signedChangeRatePriceLabel].forEach {
+            self.contentView.addSubview($0)
+        }
     }
     
     private func setAutoLayout() {
@@ -85,7 +81,6 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         self.basePriceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(self.countryLabel.snp.trailing).offset(15)
-            //$0.trailing.equalToSuperview().offset(-100)
         }
         
         self.changePriceLabel.snp.makeConstraints {
