@@ -60,11 +60,7 @@ class BaseCurrencyView: UIView {
     }
     
     func setView() {
-        self.addSubview(self.BaseCurrencyFlagImageView)
-        self.addSubview(self.BaseCurrencyTitleLable)
-        self.addSubview(self.BaseCurrencyCountryLabel)
-        self.addSubview(self.BaseCurrencyCodeNameLabel)
-        self.addSubview(self.BaseCurrencyChangeButton)
+        [self.BaseCurrencyFlagImageView, self.BaseCurrencyTitleLable, self.BaseCurrencyCountryLabel, self.BaseCurrencyCodeNameLabel, self.BaseCurrencyChangeButton].forEach { self.addSubview($0) }
     }
     
     func setAutoLayout() {
