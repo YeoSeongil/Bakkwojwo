@@ -11,7 +11,7 @@ import SnapKit
 class ExchangeRateViewController: BaseViewController{
     
     let viewModel = ExchangeRateViewModel()
-    
+    let refreshControl = UIRefreshControl()
     let BaseCurrency = BaseCurrencyView()
     
     private let mainSectionTitleLabel: BaseLabel = {
@@ -47,6 +47,7 @@ class ExchangeRateViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel.korDataLoad()
+        self.initRefresh()
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -97,6 +98,18 @@ class ExchangeRateViewController: BaseViewController{
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
             $0.bottom.equalToSuperview().offset(-30)
+        }
+    }
+    
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.exchangeRateSectionCollectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.BaseCurrency.baseCurrencyState == false ? self.viewModel.korDataLoad() : self.viewModel.usdDataLoad()
+            refresh.endRefreshing()
         }
     }
 }
