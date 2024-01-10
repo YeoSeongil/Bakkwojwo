@@ -80,7 +80,7 @@ class BaseCurrencyView: UIView {
         self.BaseCurrencyCountryLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview().offset(-10)
             $0.leading.equalTo(self.BaseCurrencyFlagImageView.snp.trailing).offset(15)
-            $0.trailing.equalToSuperview().offset(-150)
+            $0.trailing.equalToSuperview()
         } 
         
         self.BaseCurrencyCodeNameLabel.snp.makeConstraints {
