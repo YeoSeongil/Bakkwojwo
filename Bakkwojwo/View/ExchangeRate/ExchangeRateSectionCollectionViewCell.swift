@@ -29,16 +29,19 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     
     let basePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
+        label.textAlignment = .center
         return label
     }()
     
     let changePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
+        label.textAlignment = .center
         return label
     }()
     
     let signedChangeRatePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
+        label.textAlignment = .center
         return label
     }()
     
@@ -69,28 +72,31 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         self.countryLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(15)
-            $0.trailing.equalToSuperview().offset(-150)
+            $0.trailing.equalToSuperview().offset(-144)
         }
         
         self.currencyCodeNameLabel.snp.makeConstraints {
             $0.top.equalTo(self.countryLabel.snp.bottom).offset(5)
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(15)
-            $0.trailing.equalToSuperview().offset(-150)
+            $0.trailing.equalToSuperview().offset(-144)
         }
         
         self.basePriceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(self.countryLabel.snp.trailing).offset(15)
+            $0.leading.equalTo(self.countryLabel.snp.trailing)
+            $0.trailing.equalToSuperview().offset(-72)
         }
         
         self.changePriceLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-        }                
+            $0.leading.equalTo(self.basePriceLabel.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview()
+        }
         
         self.signedChangeRatePriceLabel.snp.makeConstraints {
             $0.top.equalTo(self.changePriceLabel.snp.bottom).offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.leading.equalTo(self.basePriceLabel.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview()
         }
 
     }
@@ -103,7 +109,7 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         self.changePriceLabel.text = "\(data.changePrice)"
         
         let roundSignedChangeRate = round(data.signedChangeRate * 100 * 100) / 100
-        self.signedChangeRatePriceLabel.text = "(\(roundSignedChangeRate))"
+        self.signedChangeRatePriceLabel.text = "(\(roundSignedChangeRate))%"
         self.signedChangeRatePriceLabel.textColor = roundSignedChangeRate > 0 ? .blue : .red
         
     }
