@@ -9,10 +9,12 @@ import UIKit
 import SnapKit
 
 class ExchangeRateViewController: BaseViewController{
+    let refreshControl = UIRefreshControl()
     
     let viewModel = ExchangeRateViewModel()
-    let refreshControl = UIRefreshControl()
+   
     let BaseCurrency = BaseCurrencyView()
+    let Division = ExchangeRateDivisionView()
     
     private let mainSectionTitleLabel: BaseLabel = {
         let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle2!)
@@ -62,7 +64,7 @@ class ExchangeRateViewController: BaseViewController{
 
     override func setView() {
         self.view.backgroundColor = .white
-        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionCollectionView].forEach {
+        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionCollectionView, self.Division].forEach {
             self.view.addSubview($0)
         }
     }
@@ -93,8 +95,15 @@ class ExchangeRateViewController: BaseViewController{
             $0.trailing.equalToSuperview().offset(-100)
         }
         
-        self.exchangeRateSectionCollectionView.snp.makeConstraints {
+        self.Division.snp.makeConstraints {
             $0.top.equalTo(self.exchangeRateSectionTitleLabel.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(15)
+        }
+        
+        self.exchangeRateSectionCollectionView.snp.makeConstraints {
+            $0.top.equalTo(self.Division.snp.bottom).offset(15)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
             $0.bottom.equalToSuperview().offset(-30)
