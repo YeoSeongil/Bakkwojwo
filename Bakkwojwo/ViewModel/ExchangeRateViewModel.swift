@@ -15,7 +15,6 @@ class ExchangeRateViewModel {
     var exchangeRateModel: [ExchangeRateModel] = [ExchangeRateModel]()
     {
         didSet {
-            print("TEST : exchangeRateModel Updated!")
             onUpdated()
         }
     }
@@ -24,11 +23,12 @@ class ExchangeRateViewModel {
         repository.getExchangeRateData(codes: codes) { entity in
             var model = [ExchangeRateModel]()
             
-            for index in entity {
-                for k in countryModelItem {
-                    if index.currencyCode == "\(k.key)" {
-                        let item = ExchangeRateModel(country: k.value.countryName, currencyName: k.value.currencyUnit, currencyCode: index.currencyCode, basePrice: index.basePrice, changePrice: index.changePrice, signedChangeRate: index.signedChangeRate, date: index.date, time: index.time)
+            entity.forEach {
+                for (key, value) in countryModelItem {
+                    if $0.currencyCode == key {
+                        let item = ExchangeRateModel(country: value.countryName, currencyName: value.currencyUnit, currencyCode: $0.currencyCode, basePrice: $0.basePrice, changePrice: $0.changePrice, signedChangeRate: $0.signedChangeRate, date: $0.date, time: $0.time)
                         model.append(item)
+                        break
                     }
                 }
             }
