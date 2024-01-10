@@ -58,7 +58,7 @@ class ExchangeRateViewController: BaseViewController{
             }
         }
     }
-    
+
     override func setView() {
         self.view.backgroundColor = .white
         [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionCollectionView].forEach {
