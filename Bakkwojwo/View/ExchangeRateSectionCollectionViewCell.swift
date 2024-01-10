@@ -17,27 +17,27 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    var countryLabel: BaseLabel = {
+    let countryLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h3!)
         return label
     }()   
     
-    var currencyCodeNameLabel: BaseLabel = {
+    let currencyCodeNameLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .gray , backgroundColor: .white, font: .h4!)
         return label
     }()    
     
-    var basePriceLabel: BaseLabel = {
+    let basePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
         return label
     }()
     
-    var changePriceLabel: BaseLabel = {
+    let changePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
         return label
     }()
     
-    var signedChangeRatePriceLabel: BaseLabel = {
+    let signedChangeRatePriceLabel: BaseLabel = {
         let label = BaseLabel(text: "Loading..", textColor: .black , backgroundColor: .white, font: .h4!)
         return label
     }()
