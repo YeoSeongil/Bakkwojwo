@@ -11,6 +11,9 @@ class APIManager {
     static let schema = "https"
     static let host = "quotation-api-cdn.dunamu.com"
     static let path = "/v1/forex/recent"
+    static let shared = APIManager()
+    
+    private init() {}
     
     func DunamuAPI(codes: String) -> URLComponents {
         var components = URLComponents()
