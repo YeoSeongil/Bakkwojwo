@@ -53,7 +53,6 @@ class ExchangeRateViewController: BaseViewController{
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.mainSectionSubTitleLabel.text = "\(self.viewModel.exchangeRateModel[0].date) \(self.viewModel.exchangeRateModel[0].time)"
-                self.BaseCurrency.delegate = self
                 self.exchangeRateSectionCollectionView.delegate = self
                 self.exchangeRateSectionCollectionView.dataSource = self
                 self.exchangeRateSectionCollectionView.reloadData()
@@ -116,7 +115,7 @@ class ExchangeRateViewController: BaseViewController{
     
     @objc func refresh(refresh: UIRefreshControl) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.BaseCurrency.baseCurrencyState == false ? self.viewModel.korDataLoad() : self.viewModel.usdDataLoad()
+            self.viewModel.fetchData()
             refresh.endRefreshing()
         }
     }
@@ -145,16 +144,3 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
     }
 }
 
-extension ExchangeRateViewController: BaseCurrencyViewDelegate {    
-    func BaseCurrencySetKRWTapped() {
-        self.viewModel.korDataLoad()
-        let arr = self.viewModel.exchangeRateModel.filter {$0.currencyCode == "KRW"}
-        self.BaseCurrency.setData(arr)
-    }
-    
-    func BaseCurrencySetUSDTapped() {
-        self.viewModel.usdDataLoad()
-        let arr = self.viewModel.exchangeRateModel.filter {$0.currencyCode == "USD"}
-        self.BaseCurrency.setData(arr)
-    }
-}
