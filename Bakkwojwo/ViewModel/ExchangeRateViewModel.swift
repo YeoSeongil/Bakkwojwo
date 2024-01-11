@@ -20,6 +20,10 @@ class ExchangeRateViewModel {
         }
     }
     
+    init() {
+        korDataLoad()
+    }
+    
     func fetchData(codes: String, onCompleted: @escaping ([ExchangeRateModel]) -> Void) {
         repository.getExchangeRateData(codes: codes) { entity in
             var model = [ExchangeRateModel]()
@@ -56,8 +60,6 @@ class ExchangeRateViewModel {
             guard let self = self else { return }
             self.exchangeRateModel = model
             
-            var model = [ExchangeRateModel]()
-            
             let usdIndex = self.exchangeRateModel.indices.filter ({
                 self.exchangeRateModel[$0].currencyCode == "USD"
             }).first
@@ -71,9 +73,5 @@ class ExchangeRateViewModel {
             }
         })
     }
-    
-    func test() {
-    }
 
-    
 }
