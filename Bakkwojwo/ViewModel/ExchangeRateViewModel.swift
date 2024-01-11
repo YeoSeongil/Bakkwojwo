@@ -21,10 +21,15 @@ class ExchangeRateViewModel {
     }
     
     init() {
-        korDataLoad()
+        initMyCurrency()
+        pirntRealmURL()
+        fetchData()
     }
     
-    func fetchData(codes: String, onCompleted: @escaping ([ExchangeRateModel]) -> Void) {
+    func fetchData() {
+        let resultMap = countryNameItem.map({ String("FRX.KRW\($0)") })
+        let codes = resultMap.joined(separator: ",")
+        
         repository.getExchangeRateData(codes: codes) { entity in
             var model = [ExchangeRateModel]()
             
@@ -37,41 +42,32 @@ class ExchangeRateViewModel {
                     }
                 }
             }
-            onCompleted(model)
+            self.exchangeRateModel = model
         }
     }
     
-    func korDataLoad() {
-        let resultMap = countryNameItem.map({ String("FRX.KRW\($0)") })
-        let codes = resultMap.joined(separator: ",")
+    func myCurrencyTest() {
+        let myCurrency = realm.read(MyCurrencyModel.self)
+        let myCurrencyArr = Array(myCurrency)
+        var arr = [ExchangeRateModel]()
         
-        self.fetchData(codes: codes, onCompleted: { [weak self] model in
-            guard let self = self else { return }
-            self.exchangeRateModel = model
-        })
-        
+        for item in myCurrencyArr {
+            let a = self.exchangeRateModel.filter { $0.currencyCode == item.currencyCode}
+            arr.append(contentsOf:a)
+        }
+        self.exchangeRateModel = arr
     }
     
-    func usdDataLoad() {
-        let resultMap = countryNameItem.map({ String("FRX.\($0)USD") })
-        let codes = resultMap.joined(separator: ",")
-        
-        self.fetchData(codes: codes, onCompleted: { [weak self] model in
-            guard let self = self else { return }
-            self.exchangeRateModel = model
-            
-            let usdIndex = self.exchangeRateModel.indices.filter ({
-                self.exchangeRateModel[$0].currencyCode == "USD"
-            }).first
-            
-            self.exchangeRateModel.map {
-                if $0.currencyCode == "USD" {
-                    self.exchangeRateModel.remove(at: usdIndex!)
-                    let item = ExchangeRateModel(country: "대한민국", currencyName: "원(₩)", currencyCode: "KRW", basePrice: $0.basePrice, changePrice: $0.changePrice, signedChangeRate: $0.signedChangeRate, date: $0.date, time: $0.time)
-                    self.exchangeRateModel.insert(item, at: self.exchangeRateModel.startIndex)
-                }
-            }
-        })
+    func pirntRealmURL() {
+        realm.getLocalRealmURL()
     }
-
+    
+    fileprivate func initMyCurrency() {
+        let myCurrency = realm.read(MyCurrencyModel.self)
+        if myCurrency.isEmpty == true {
+            [MyCurrencyModel(currencyCode: "KRW"), MyCurrencyModel(currencyCode: "USD"), MyCurrencyModel(currencyCode: "JPY"), MyCurrencyModel(currencyCode: "EUR"), MyCurrencyModel(currencyCode: "CNY")].forEach {
+                realm.write($0.self)
+            }
+        }
+    }
 }
