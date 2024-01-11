@@ -8,17 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol BaseCurrencyViewDelegate: AnyObject {
-    func BaseCurrencySetKRWTapped()
-    func BaseCurrencySetUSDTapped()
-}
-
 class BaseCurrencyView: UIView {
-    weak var delegate: BaseCurrencyViewDelegate?
-    let viewModel = ExchangeRateViewModel()
-    
-    var baseCurrencyState:Bool = false
-    
     let BaseCurrencyTitleLable: BaseLabel = {
         let label = BaseLabel(text: "기준 통화", textColor: .black, backgroundColor: .clear, font: .h2!)
         return label
@@ -40,14 +30,6 @@ class BaseCurrencyView: UIView {
         let label = BaseLabel(text: "KRW", textColor: .gray , backgroundColor: .white, font: .h4!)
         return label
     }()
-    
-    let BaseCurrencyChangeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(testButton), for: .touchUpInside)
-        return button
-    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +42,7 @@ class BaseCurrencyView: UIView {
     }
     
     func setView() {
-        [self.BaseCurrencyFlagImageView, self.BaseCurrencyTitleLable, self.BaseCurrencyCountryLabel, self.BaseCurrencyCodeNameLabel, self.BaseCurrencyChangeButton].forEach { self.addSubview($0) }
+        [self.BaseCurrencyFlagImageView, self.BaseCurrencyTitleLable, self.BaseCurrencyCountryLabel, self.BaseCurrencyCodeNameLabel].forEach { self.addSubview($0) }
     }
     
     func setAutoLayout() {
@@ -88,29 +70,11 @@ class BaseCurrencyView: UIView {
             $0.leading.equalTo(self.BaseCurrencyFlagImageView.snp.trailing).offset(15)
             $0.trailing.equalToSuperview().offset(-150)
         }
-        
-        self.BaseCurrencyChangeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
     }
     
     func setData(_ data: [ExchangeRateModel]) {
         self.BaseCurrencyFlagImageView.image = UIImage(named: data[0].currencyCode)
         self.BaseCurrencyCountryLabel.text = "\(data[0].country) \(data[0].currencyName)"
         self.BaseCurrencyCodeNameLabel.text = data[0].currencyCode
-    }
-    
-    @objc func testButton(_ sender: UIButton) {
-        // 다른 로직으로 수정
-        if self.baseCurrencyState == false {
-            self.baseCurrencyState = true
-        } else {
-            self.baseCurrencyState = false
-        }
-        
-        self.baseCurrencyState == false ? self.delegate?.BaseCurrencySetKRWTapped() : self.delegate?.BaseCurrencySetUSDTapped()
     }
 }
