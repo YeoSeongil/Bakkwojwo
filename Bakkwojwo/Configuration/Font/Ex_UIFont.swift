@@ -19,11 +19,12 @@ extension UIFont {
 }
 
 extension UIFont {
-    static let mainTitle = UIFont(name: Pretendard.bold.rawValue, size: 27)
+    static let mainTitle = UIFont(name: Pretendard.regular.rawValue, size: 19)
+    static let mainTitle2 = UIFont(name: Pretendard.bold.rawValue, size: 22)
     static let subTitle = UIFont(name: Pretendard.thin.rawValue, size: 15)
     
 
-    static let h2 = UIFont(name: Pretendard.medium.rawValue, size: 20)
-    static let h3 = UIFont(name: Pretendard.light.rawValue, size: 15)
+    static let h2 = UIFont(name: Pretendard.medium.rawValue, size: 16)
+    static let h3 = UIFont(name: Pretendard.light.rawValue, size: 12)
     static let h4 = UIFont(name: Pretendard.light.rawValue, size: 10)
 }
