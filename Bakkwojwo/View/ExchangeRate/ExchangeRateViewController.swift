@@ -48,7 +48,6 @@ class ExchangeRateViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.korDataLoad()
         self.initRefresh()
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
