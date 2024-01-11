@@ -13,14 +13,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let rootViewController = ExchangeRateViewController()
-        window?.rootViewController = rootViewController
+        let calculator = CalculatorViewController()
+
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([rootViewController, calculator], animated: true)
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.tintColor = .black
+        if let items = tabBarController.tabBar.items {
+            items[0].selectedImage = UIImage(systemName: "dollarsign.circle.fill")
+            items[0].image = UIImage(systemName: "dollarsign.circle")
+            items[0].title = "환율"
+            
+            items[1].selectedImage = UIImage(systemName: "123.rectangle.fill")
+            items[1].image = UIImage(systemName: "123.rectangle")
+            items[1].title = "계산기"
+        }
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
