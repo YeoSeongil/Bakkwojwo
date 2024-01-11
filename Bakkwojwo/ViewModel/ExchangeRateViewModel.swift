@@ -8,7 +8,8 @@
 import Foundation
 
 class ExchangeRateViewModel {
-    let repository = APIManager()
+    private let realm = RealmManager.shared
+    private let repository = APIManager.shared
     
     var onUpdated: () -> Void = {}
     
@@ -70,5 +71,9 @@ class ExchangeRateViewModel {
             }
         })
     }
+    
+    func test() {
+    }
+
     
 }
