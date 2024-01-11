@@ -49,7 +49,6 @@ let countryModelItem: [String: CountryModel] = [
     
     // America
     "USD" : CountryModel(countryName: "미국", currencyUnit: "달러($)"),
-    "EUR" : CountryModel(countryName: "유럽연합", currencyUnit: "유로(€)"),
     "CAD" : CountryModel(countryName: "캐나다", currencyUnit: "달러(CAN$)"),
     "MXN" : CountryModel(countryName: "멕시코", currencyUnit: "페소(MEX$)"),
     "BRL" : CountryModel(countryName: "브라질", currencyUnit: "헤알(R$)"),
@@ -59,7 +58,6 @@ let countryModelItem: [String: CountryModel] = [
     // Europe
     "GBP" : CountryModel(countryName: "영국", currencyUnit: "파운드(£)"),
     "RUB" : CountryModel(countryName: "러시아", currencyUnit: "루블(₽)"),
-    "ZAR" : CountryModel(countryName: "남아프리카공화국", currencyUnit: "랜드(R)"),
     "NOK" : CountryModel(countryName: "노르웨이", currencyUnit: "크로네(kr)"),
     "DKK" : CountryModel(countryName: "덴마크", currencyUnit: "크로네(kr)"),
     "SEK" : CountryModel(countryName: "스웨덴", currencyUnit: "크로나(kr)"),
@@ -68,10 +66,12 @@ let countryModelItem: [String: CountryModel] = [
     "TRY" : CountryModel(countryName: "터키", currencyUnit: "리라(₺)"),
     "PLN" : CountryModel(countryName: "폴란드", currencyUnit: "즈워티(zł)"),
     "HUF" : CountryModel(countryName: "헝가리", currencyUnit: "포린트(Ft)"),
+    "EUR" : CountryModel(countryName: "유럽연합", currencyUnit: "유로(€)"),
     
     // Africa
     "DZD" : CountryModel(countryName: "알제리", currencyUnit: "디나르(د. ج)"),
     "EGP" : CountryModel(countryName: "이집트", currencyUnit: "파운드(E£)"),
     "KES" : CountryModel(countryName: "케냐", currencyUnit: "실링(KSh)"),
     "TZS" : CountryModel(countryName: "탄자니아", currencyUnit: "실링(TSh)"),
+    "ZAR" : CountryModel(countryName: "남아프리카공화국", currencyUnit: "랜드(R)"),
 ]
