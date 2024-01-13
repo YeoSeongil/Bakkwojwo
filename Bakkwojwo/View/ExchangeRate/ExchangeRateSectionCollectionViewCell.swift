@@ -140,13 +140,13 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     
     func isHiddenAnimation(state: Bool) {
         if state == false {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.flagImageView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.countryLabel.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 0, y: 0)
             })
         } else {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.flagImageView.transform = CGAffineTransform(translationX: 35, y: 0)
                 self.countryLabel.transform = CGAffineTransform(translationX: 35, y: 0)
                 self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 35, y: 0)
