@@ -8,8 +8,20 @@
 import UIKit
 import SnapKit
 
+protocol ExchangeRateSectionCollectionViewDelegate {
+    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell)
+}
+
 class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
+    
+    var delegate: ExchangeRateSectionCollectionViewDelegate?
+    
     static let registerId: String = "ExchangeRateSectionCollectionViewCell"
+    
+    let checkBox: CheckBox = {
+        let button = CheckBox()
+        return button
+    }()
     
     let flagImageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,6 +61,12 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         self.setView()
         self.setAutoLayout()
+        
+        self.checkBox.tapped = { [weak self] in
+            guard let self = self else {return}
+            self.delegate?.checkBoxButtonTapped(self)
+            print(checkBox.isChecked)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -56,12 +74,19 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setView() {
-        [self.flagImageView, self.countryLabel, self.currencyCodeNameLabel, self.basePriceLabel, self.changePriceLabel, self.signedChangeRatePriceLabel].forEach {
+        [self.checkBox,self.flagImageView, self.countryLabel, self.currencyCodeNameLabel, self.basePriceLabel, self.changePriceLabel, self.signedChangeRatePriceLabel].forEach {
             self.contentView.addSubview($0)
         }
     }
     
     private func setAutoLayout() {
+        self.checkBox.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(25)
+            $0.width.equalTo(25)
+        }
+        
         self.flagImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview()
@@ -111,6 +136,22 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         let roundSignedChangeRate = round(data.signedChangeRate * 100 * 100) / 100
         self.signedChangeRatePriceLabel.text = "(\(roundSignedChangeRate)%)"
         self.signedChangeRatePriceLabel.textColor = roundSignedChangeRate > 0 ? .blue : .red
-        
+    }
+    
+    func isHiddenAnimation(state: Bool) {
+        if state == false {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.flagImageView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.countryLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.flagImageView.transform = CGAffineTransform(translationX: 35, y: 0)
+                self.countryLabel.transform = CGAffineTransform(translationX: 35, y: 0)
+                self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 35, y: 0)
+                self.checkBox.alpha = 1.0
+            })
+        }
     }
 }
