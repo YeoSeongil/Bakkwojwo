@@ -54,7 +54,18 @@ class ExchangeRateViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initRefresh()
-        
+        self.bind()
+        self.exchangeReateSectionEditButtonToggle()
+    }
+
+    override func setView() {
+        self.view.backgroundColor = .white
+        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionEditButton, self.exchangeRateSectionCollectionView, self.Division].forEach {
+            self.view.addSubview($0)
+        }
+    }
+    
+    func bind() {
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -64,26 +75,22 @@ class ExchangeRateViewController: BaseViewController{
                 self.exchangeRateSectionCollectionView.reloadData()
             }
         }
-        
+    }
+    
+    private func exchangeReateSectionEditButtonToggle() {
         self.exchangeRateSectionEditButton.onUpdated = { [weak self] in
-            if self?.exchangeRateSectionEditButton.isChecked == false {
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.viewModel.myCurrency()
+            guard let self = self else {return}
+            if self.exchangeRateSectionEditButton.isChecked == false {
+                self.viewModel.myCurrency()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.exchangeRateSectionCollectionView.reloadData()
                 }
             } else {
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.viewModel.fetchData()
+                self.viewModel.fetchData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    self.exchangeRateSectionCollectionView.reloadData()
                 }
             }
-        }
-    }
-
-    override func setView() {
-        self.view.backgroundColor = .white
-        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionEditButton, self.exchangeRateSectionCollectionView, self.Division].forEach {
-            self.view.addSubview($0)
         }
     }
     
