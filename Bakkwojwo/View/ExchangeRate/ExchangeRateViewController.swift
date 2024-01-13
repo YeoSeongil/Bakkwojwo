@@ -36,6 +36,11 @@ class ExchangeRateViewController: BaseViewController{
         return label
     }()
     
+    private let exchangeRateSectionEditButton: ToggleButton = {
+        let button = ToggleButton(offTitle: "편집", onTitle: "완료", titleColor: .black, backgroundColor: .clear, font: .h3!)
+        return button
+    }()
+    
     private let exchangeRateSectionCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -49,6 +54,7 @@ class ExchangeRateViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initRefresh()
+        
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -58,11 +64,25 @@ class ExchangeRateViewController: BaseViewController{
                 self.exchangeRateSectionCollectionView.reloadData()
             }
         }
+        
+        self.exchangeRateSectionEditButton.onUpdated = { [weak self] in
+            if self?.exchangeRateSectionEditButton.isChecked == false {
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.viewModel.myCurrency()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.viewModel.fetchData()
+                }
+            }
+        }
     }
 
     override func setView() {
         self.view.backgroundColor = .white
-        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionCollectionView, self.Division].forEach {
+        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.BaseCurrency, self.baseCurrencySectionTitleLabel, self.exchangeRateSectionTitleLabel, self.exchangeRateSectionEditButton, self.exchangeRateSectionCollectionView, self.Division].forEach {
             self.view.addSubview($0)
         }
     }
@@ -93,6 +113,12 @@ class ExchangeRateViewController: BaseViewController{
             $0.trailing.equalToSuperview().offset(-100)
         }
         
+        self.exchangeRateSectionEditButton.snp.makeConstraints {
+            $0.top.equalTo(self.BaseCurrency.snp.bottom).offset(10)
+            $0.leading.equalTo(self.exchangeRateSectionTitleLabel.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview()
+        }
+        
         self.Division.snp.makeConstraints {
             $0.top.equalTo(self.exchangeRateSectionTitleLabel.snp.bottom).offset(15)
             $0.leading.equalToSuperview().offset(15)
@@ -112,10 +138,10 @@ class ExchangeRateViewController: BaseViewController{
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         self.exchangeRateSectionCollectionView.refreshControl = refreshControl
     }
-    
+
     @objc func refresh(refresh: UIRefreshControl) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.viewModel.fetchData()
+            self.viewModel.myCurrency()
             refresh.endRefreshing()
         }
     }
@@ -139,8 +165,16 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let data = self.viewModel.exchangeRateModel[indexPath.row]
+        cell.isHiddenAnimation(state: self.exchangeRateSectionEditButton.isChecked)
         cell.setData(data)
+        cell.delegate = self
         return cell
     }
 }
 
+extension ExchangeRateViewController: ExchangeRateSectionCollectionViewDelegate {
+    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell) {
+        guard let indexPath = self.exchangeRateSectionCollectionView.indexPath(for: cell) else { return }
+        print(indexPath.row)
+    }
+}
