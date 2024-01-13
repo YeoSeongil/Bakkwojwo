@@ -12,7 +12,7 @@ class ExchangeRateViewModel {
     private let repository = APIManager.shared
     
     var onUpdated: () -> Void = {}
-    
+
     var exchangeRateModel: [ExchangeRateModel] = [ExchangeRateModel]()
     {
         didSet {
@@ -22,7 +22,7 @@ class ExchangeRateViewModel {
     
     init() {
         initMyCurrency()
-        pirntRealmURL()
+        pirntRealmURL ()
         fetchData()
     }
     
@@ -44,30 +44,36 @@ class ExchangeRateViewModel {
             }
             self.exchangeRateModel = model
         }
-    }
+    }      
     
-    func myCurrencyTest() {
+    func myCurrency() {
         let myCurrency = realm.read(MyCurrencyModel.self)
         let myCurrencyArr = Array(myCurrency)
-        var arr = [ExchangeRateModel]()
+        var model = [ExchangeRateModel]()
         
         for item in myCurrencyArr {
             let a = self.exchangeRateModel.filter { $0.currencyCode == item.currencyCode}
-            arr.append(contentsOf:a)
+            model.append(contentsOf: a)
         }
-        self.exchangeRateModel = arr
+        self.exchangeRateModel = model
+        
+        print("호출")
     }
     
-    func pirntRealmURL() {
+    fileprivate func pirntRealmURL() {
         realm.getLocalRealmURL()
     }
     
     fileprivate func initMyCurrency() {
         let myCurrency = realm.read(MyCurrencyModel.self)
+        let initModel = countryNameItem.map {
+            MyCurrencyModel(currencyCode: $0)
+        }
         if myCurrency.isEmpty == true {
-            [MyCurrencyModel(currencyCode: "KRW"), MyCurrencyModel(currencyCode: "USD"), MyCurrencyModel(currencyCode: "JPY"), MyCurrencyModel(currencyCode: "EUR"), MyCurrencyModel(currencyCode: "CNY")].forEach {
+            initModel.forEach {
                 realm.write($0.self)
             }
         }
     }
+    
 }
