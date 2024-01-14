@@ -16,6 +16,8 @@ class ExchangeRateViewController: BaseViewController{
     let BaseCurrency = BaseCurrencyView()
     let Division = ExchangeRateDivisionView()
     
+    var isCheckedArray: [Bool] = []
+    
     private let mainSectionTitleLabel: BaseLabel = {
         let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle2!)
         return label
@@ -81,15 +83,10 @@ class ExchangeRateViewController: BaseViewController{
         self.exchangeRateSectionEditButton.onUpdated = { [weak self] in
             guard let self = self else {return}
             if self.exchangeRateSectionEditButton.isChecked == false {
-                self.viewModel.myCurrency()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.exchangeRateSectionCollectionView.reloadData()
-                }
+                self.viewModel.myCurrencyUpdate(isCheckedArray)
+                self.viewModel.dataLoad()
             } else {
-                self.viewModel.fetchData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    self.exchangeRateSectionCollectionView.reloadData()
-                }
+                self.viewModel.allDataLoad()
             }
         }
     }
@@ -148,7 +145,11 @@ class ExchangeRateViewController: BaseViewController{
 
     @objc func refresh(refresh: UIRefreshControl) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.viewModel.myCurrency()
+            if self.exchangeRateSectionEditButton.isChecked == true {
+                self.viewModel.allDataLoad()
+            } else {
+                self.viewModel.dataLoad()
+            }
             refresh.endRefreshing()
         }
     }
@@ -175,13 +176,19 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
         cell.isHiddenAnimation(state: self.exchangeRateSectionEditButton.isChecked)
         cell.setData(data)
         cell.delegate = self
+        
+        isCheckedArray = self.viewModel.exchangeRateModel.map {
+            $0.isChecked
+        }
+
+        cell.checkBox.isChecked = isCheckedArray[indexPath.row] == true ? true : false
         return cell
     }
 }
 
 extension ExchangeRateViewController: ExchangeRateSectionCollectionViewDelegate {
-    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell) {
+    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell, _ button: CheckBox) {
         guard let indexPath = self.exchangeRateSectionCollectionView.indexPath(for: cell) else { return }
-        print(indexPath.row)
+        isCheckedArray[indexPath.row] = button.isChecked == true ? true : false
     }
 }
