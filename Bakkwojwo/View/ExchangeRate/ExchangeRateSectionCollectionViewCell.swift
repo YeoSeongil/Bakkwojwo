@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol ExchangeRateSectionCollectionViewDelegate {
-    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell)
+    func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell, _ button: CheckBox)
 }
 
 class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
@@ -57,15 +57,18 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setView()
         self.setAutoLayout()
-        
         self.checkBox.tapped = { [weak self] in
             guard let self = self else {return}
-            self.delegate?.checkBoxButtonTapped(self)
-            print(checkBox.isChecked)
+            self.delegate?.checkBoxButtonTapped(self, self.checkBox)
         }
     }
     
@@ -140,13 +143,13 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
     
     func isHiddenAnimation(state: Bool) {
         if state == false {
-            UIView.animate(withDuration: 0.4, animations: {
+            UIView.animate(withDuration: 0.35, animations: {
                 self.flagImageView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.countryLabel.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 0, y: 0)
             })
         } else {
-            UIView.animate(withDuration: 0.4, animations: {
+            UIView.animate(withDuration: 0.35, animations: {
                 self.flagImageView.transform = CGAffineTransform(translationX: 35, y: 0)
                 self.countryLabel.transform = CGAffineTransform(translationX: 35, y: 0)
                 self.currencyCodeNameLabel.transform = CGAffineTransform(translationX: 35, y: 0)
