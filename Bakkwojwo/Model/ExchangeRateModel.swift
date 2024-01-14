@@ -16,4 +16,5 @@ struct ExchangeRateModel: Codable {
     let signedChangeRate: Double // - 0.00112
     let date: String
     let time: String
+    var isChecked: Bool = true
 }
