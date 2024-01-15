@@ -155,6 +155,7 @@ class ExchangeRateViewController: BaseViewController{
     }
 }
 
+// - TODO - 셀 재사용 시 발생하는 문제 해결 ➡️ 체크박스 클릭 시 다른 셀의 체크박스도 체크 되는 현상 해결
 extension ExchangeRateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = collectionView.bounds.width
