@@ -93,16 +93,16 @@ class ExchangeRateViewController: BaseViewController{
     
     override func setAutoLayout() {
         self.mainSectionTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(65)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
             $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-200)
+            $0.trailing.equalToSuperview().offset(-15)
         }
         
         self.mainSectionSubTitleLabel.snp.makeConstraints {
             $0.top.equalTo(self.mainSectionTitleLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(15)
-            $0.trailing.equalToSuperview().offset(-100)
-        }  
+            $0.trailing.equalToSuperview().offset(-15)
+        }
         
         self.BaseCurrency.snp.makeConstraints {
             $0.top.equalTo(self.mainSectionSubTitleLabel.snp.bottom).offset(30)
