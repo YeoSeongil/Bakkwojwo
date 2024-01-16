@@ -6,24 +6,34 @@
 //
 
 import UIKit
+import SnapKit
 
-class CalculatorViewController: UIViewController {
+class CalculatorViewController: BaseViewController {
 
+    let testView = CalculatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UIScreen.main.bounds.size.height/2.3)
+    }
 
-        // Do any additional setup after loading the view.
+    
+    override func setView() {
+        self.view.backgroundColor = .white
+        self.view.addSubview(self.testView)
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func setAutoLayout() {
+        self.testView.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.height.equalTo(UIScreen.main.bounds.size.height / 3.0)
+        }
     }
-    */
+    
+    
+
+
 
 }
