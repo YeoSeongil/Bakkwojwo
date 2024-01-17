@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class CalculatorKey: UIButton {
+    var buttonTapped: (_ item: String) -> Void = { item in }
     
     init(keyTitle: String) {
         super.init(frame: CGRect.zero)
@@ -25,6 +26,6 @@ class CalculatorKey: UIButton {
     
     @objc func keyTapped(_ sender: UIButton) {
         guard let symbol = sender.currentTitle else { return }
-        print(symbol)
+       buttonTapped(symbol)
     }
 }
