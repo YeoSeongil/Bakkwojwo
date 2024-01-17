@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
-class CalculatorView: BaseView {
+protocol CalculatorViewDelegate {
+    func onUpdateInputView(_ k: String)
+}
 
+class CalculatorView: BaseView {
+    var delegate: CalculatorViewDelegate?
     let dotButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: ".")
         return key
@@ -94,6 +98,11 @@ class CalculatorView: BaseView {
     override func setView() {
         [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton].forEach {
             self.addSubview($0) }
+        
+        [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton].forEach {
+            $0.buttonTapped = { k in
+                self.delegate?.onUpdateInputView(k)
+            } }
     }
     
     override func setAutoLayout() {
@@ -210,5 +219,5 @@ class CalculatorView: BaseView {
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
         }
     }
-
+    
 }
