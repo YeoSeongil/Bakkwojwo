@@ -30,16 +30,22 @@ class CalculatorResultView: BaseView {
         let label = UILabel()
         label.font = .h5
         label.textAlignment = .right
+        label.textColor = .black
+        label.text = "0"
+        return label
+    }()   
+    
+    let resultView: UILabel = {
+        let label = UILabel()
+        label.font = .h6
+        label.textAlignment = .right
+        label.textColor = .lightGray
+        label.text = ""
         return label
     }()
     
-    let resultTextField: UITextField = {
-        let textField = UITextField()
-        return textField
-    }()
-    
     override func setView() {
-        [self.flagImageView, self.inputOperatorView].forEach { self.addSubview($0) }
+        [self.flagImageView, self.inputOperatorView, self.resultView].forEach { self.addSubview($0) }
         self.backgroundColor =  .MidLights
     }
     
@@ -51,16 +57,16 @@ class CalculatorResultView: BaseView {
             $0.centerY.equalToSuperview()
         }
         
-//        self.inputOperatorTextField.snp.makeConstraints {
-//            $0.top.equalToSuperview()
-//            $0.bottom.equalToSuperview()
-//            $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
-//            $0.trailing.equalToSuperview().offset(-35)
-//        }        
-        
         self.inputOperatorView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalTo(self.resultView.snp.bottom).offset(5)
             $0.bottom.equalToSuperview()
+            $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(-35)
+        }
+        
+        self.resultView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-50)
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-35)
         }
