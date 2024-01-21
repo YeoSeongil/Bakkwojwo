@@ -82,9 +82,9 @@ class CalculatorViewModel {
                     result = result + Double(inputViewString[key])!
                 case Operator.minus.rawValue:
                     result = result - Double(inputViewString[key])!
-                case Operator.divide.rawValue:
-                    result = result * Double(inputViewString[key])!
                 case Operator.multiply.rawValue:
+                    result = result * Double(inputViewString[key])!
+                case Operator.divide.rawValue:
                     result = result / Double(inputViewString[key])!
                 default:
                     break
