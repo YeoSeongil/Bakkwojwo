@@ -22,6 +22,7 @@ class CheckBox: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setImage()
+        self.setButton()
         self.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
     }
     
@@ -31,7 +32,6 @@ class CheckBox: UIButton {
     
     private func setButton() {
         self.backgroundColor = .clear
-        self.setImage(UIImage(systemName: "square"), for: .normal)
         self.tintColor = .black
         self.setTitleColor(.black, for: .normal)
     }
