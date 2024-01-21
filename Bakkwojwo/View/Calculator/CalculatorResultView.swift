@@ -32,13 +32,12 @@ class CalculatorResultView: BaseView {
         label.font = .h6
         label.textAlignment = .right
         label.textColor = .lightGray
-        label.text = "0"
+        label.text = " "
         return label
     }()
     
     override func setView() {
         [self.flagImageView, self.inputKeyValueView, self.calculateResultView].forEach { self.addSubview($0) }
-        self.backgroundColor =  .MidLights
     }
     
     override func setAutoLayout() {
@@ -50,15 +49,15 @@ class CalculatorResultView: BaseView {
         }
         
         self.inputKeyValueView.snp.makeConstraints {
-            $0.top.equalTo(self.calculateResultView.snp.bottom).offset(5)
+            $0.height.equalTo(UIScreen.main.bounds.size.height / (13 * 2))
             $0.bottom.equalToSuperview()
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-35)
         }
         
         self.calculateResultView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-50)
+            $0.top.equalToSuperview().offset(5)
+            $0.height.equalTo(UIScreen.main.bounds.size.height / (13 * 3))
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-35)
         }
