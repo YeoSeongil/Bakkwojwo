@@ -56,7 +56,6 @@ class ExchangeRateViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initRefresh()
-        self.bind()
         self.exchangeReateSectionEditButtonToggle()
     }
 
@@ -67,7 +66,7 @@ class ExchangeRateViewController: BaseViewController{
         }
     }
     
-    func bind() {
+   override func bind() {
         self.viewModel.onUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
