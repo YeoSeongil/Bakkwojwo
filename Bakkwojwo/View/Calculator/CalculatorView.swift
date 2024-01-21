@@ -11,6 +11,7 @@ import SnapKit
 
 protocol CalculatorViewDelegate {
     func tappedKey(_ k: String)
+    func tappedOper(_ k: String)
 }
 
 class CalculatorView: BaseView {
@@ -99,9 +100,15 @@ class CalculatorView: BaseView {
         [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton].forEach {
             self.addSubview($0) }
         
-        [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton, self.sumButton, self.minButton, self.divButton, self.mulButton].forEach {
+        [self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton].forEach {
             $0.buttonTapped = { k in
                 self.delegate?.tappedKey(k)
+            }
+        }
+        
+        [self.dotButton, self.delButton, self.sumButton, self.minButton, self.divButton, self.mulButton].forEach {
+            $0.buttonTapped = { k in
+                self.delegate?.tappedOper(k)
             }
         }
 
