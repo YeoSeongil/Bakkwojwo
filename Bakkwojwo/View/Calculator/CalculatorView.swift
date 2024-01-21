@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol CalculatorViewDelegate {
-    func onUpdateInputView(_ k: String)
+    func tappedKey(_ k: String)
 }
 
 class CalculatorView: BaseView {
@@ -68,27 +68,27 @@ class CalculatorView: BaseView {
     let fourButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "4")
         return key
-    }()    
+    }()
     
     let fiveButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "5")
         return key
-    }()    
+    }()
     
     let sixButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "6")
         return key
-    }()    
+    }()
     
     let sevenButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "7")
         return key
-    }()    
+    }()
     
     let eightButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "8")
         return key
-    }()    
+    }()
     
     let nineButton: CalculatorKey = {
         let key = CalculatorKey(keyTitle: "9")
@@ -99,14 +99,15 @@ class CalculatorView: BaseView {
         [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton].forEach {
             self.addSubview($0) }
         
-        [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton].forEach {
+        [self.dotButton, self.zeroButton, self.divButton, self.mulButton, self.oneButton, self.twoButton, self.threeButton, self.minButton, self.fourButton, self.fiveButton, self.sixButton, self.sumButton, self.sevenButton, self.eightButton, self.nineButton, self.delButton, self.sumButton, self.minButton, self.divButton, self.mulButton].forEach {
             $0.buttonTapped = { k in
-                self.delegate?.onUpdateInputView(k)
-            } }
+                self.delegate?.tappedKey(k)
+            }
+        }
+
     }
     
     override func setAutoLayout() {
-        
         self.dotButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom)
             $0.leading.equalToSuperview()
@@ -126,28 +127,28 @@ class CalculatorView: BaseView {
             $0.leading.equalTo(super.safeAreaLayoutGuide.snp.leading).offset(UIScreen.main.bounds.width / (4.0 / 2.0))
             $0.width.equalTo(UIScreen.main.bounds.size.width / (4.0))
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.mulButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom)
             $0.leading.equalTo(super.safeAreaLayoutGuide.snp.leading).offset(UIScreen.main.bounds.width / (4.0 / 3.0))
             $0.width.equalTo(UIScreen.main.bounds.size.width / (4.0))
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }       
+        }
         
         self.oneButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0)))
             $0.leading.equalToSuperview()
             $0.width.equalTo(UIScreen.main.bounds.size.width / 4.0)
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.twoButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0)))
             $0.leading.equalTo(super.safeAreaLayoutGuide.snp.leading).offset(UIScreen.main.bounds.width / (4.0))
             $0.width.equalTo(UIScreen.main.bounds.size.width / 4.0)
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.threeButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0)))
@@ -161,14 +162,14 @@ class CalculatorView: BaseView {
             $0.leading.equalTo(super.safeAreaLayoutGuide.snp.leading).offset(UIScreen.main.bounds.width / (4.0 / 3.0))
             $0.width.equalTo(UIScreen.main.bounds.size.width / (4.0))
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.fourButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0) / 2))
             $0.leading.equalToSuperview()
             $0.width.equalTo(UIScreen.main.bounds.size.width / 4.0)
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.fiveButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0) / 2))
@@ -189,14 +190,14 @@ class CalculatorView: BaseView {
             $0.leading.equalTo(super.safeAreaLayoutGuide.snp.leading).offset(UIScreen.main.bounds.width / (4.0 / 3.0))
             $0.width.equalTo(UIScreen.main.bounds.size.width / (4.0))
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.sevenButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0) / 3))
             $0.leading.equalToSuperview()
             $0.width.equalTo(UIScreen.main.bounds.size.width / 4.0)
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
-        }        
+        }
         
         self.eightButton.snp.makeConstraints {
             $0.bottom.equalTo(super.safeAreaLayoutGuide.snp.bottom).offset(UIScreen.main.bounds.height / -((3.0 * 4.0) / 3))
@@ -219,5 +220,4 @@ class CalculatorView: BaseView {
             $0.height.equalTo(UIScreen.main.bounds.size.height / (3.0 * 4.0))
         }
     }
-    
 }
