@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         self.setView()
         self.setAutoLayout()
+        self.bind()
     }
     
     /// 해당 ViewController를 셋업 합니다. (배경색상, UI 프로퍼티 할당 등)
@@ -24,7 +25,6 @@ class BaseViewController: UIViewController {
     ///     self.view.backgroundColor = .blue
     /// }
     func setView() {
-        self.view.backgroundColor = .white
     }
     
     /// 해당 ViewController의 UI 프로퍼티의 AutoLayout(제약조건)을 셋업합니다.
@@ -33,6 +33,17 @@ class BaseViewController: UIViewController {
     ///      self.label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
     /// }
     func setAutoLayout() {
+        
+    }
+    
+    /// 해당 ViewController의 ViewModel을 Bind 합니다.
+    /// ```
+    /// func bind() {
+    ///      self.viewModel.onUpdated { [weak self] in
+    ///         self.label.text = self.viewModel.currentLabel
+    ///      }
+    /// }
+    func bind() {
         
     }
 }
