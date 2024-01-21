@@ -41,17 +41,13 @@ class CalculatorViewController: BaseViewController {
     
     override func bind() {
         self.viewModel.onInputViewUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.CalculatorResult.inputKeyValueView.text = self.viewModel.currentInputViewString
-            }
+            guard let self = self else { return }
+            self.CalculatorResult.inputKeyValueView.text = self.viewModel.currentInputViewString
         }
         
         self.viewModel.onResultViewUpdated =  { [weak self] in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.CalculatorResult.calculateResultView.text = self.viewModel.currentResultString
-            }
+            guard let self = self else { return }
+            self.CalculatorResult.calculateResultView.text = self.viewModel.currentResultString
         }
     }
 }
