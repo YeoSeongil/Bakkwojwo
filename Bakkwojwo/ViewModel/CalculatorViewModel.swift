@@ -17,64 +17,83 @@ enum Operator: String {
 }
 
 class CalculatorViewModel {
-    var onUpdated: () -> Void = {}
+    var onInputViewUpdated: () -> Void = {}
+    var onResultViewUpdated: () -> Void = {}
     var operArr = [String]()
-    var currentInputViewText: String = "0"
+    
+    var currentInputViewString: String = "0"
     {
         didSet {
-            onUpdated()
-            print("on Updated!")
+            onInputViewUpdated()
         }
     }
     
-    func calculate(_ k: String) {
-        if k != Operator.plus.rawValue && k != Operator.minus.rawValue && k != Operator.multiply.rawValue && k != Operator.divide.rawValue && k != Operator.delete.rawValue && k != Operator.dot.rawValue {
-            if self.currentInputViewText.first == "0" && self.currentInputViewText.count == 1 {
-                self.currentInputViewText.removeFirst()
-            }
-            self.currentInputViewText = self.currentInputViewText + k
-        }  else if k == "DEL" {
-            if self.currentInputViewText.last == " " {
-                self.currentInputViewText = String(self.currentInputViewText.dropLast(3))
-            }  else if  self.currentInputViewText.count == 1 {
-                self.currentInputViewText = "0"
-            } else  {
-                self.currentInputViewText = String(self.currentInputViewText.dropLast(1))
-            }
-        } else if k == "." {
-            if self.currentInputViewText.last != "." &&   self.currentInputViewText.last != " " && self.operArr.last != "."{
-                self.currentInputViewText = self.currentInputViewText + k
-                self.operArr.append(k)
-            }
+    var currentResultString: String = "0"
+    {
+        didSet {
+            onResultViewUpdated()
         }
-        else {
-            if self.currentInputViewText.last != " " &&  self.currentInputViewText.last != "."{
-                self.currentInputViewText = self.currentInputViewText + " " + k + " "
-                self.operArr.append(k)
+    }
+    
+    func numberKeyTapped(_ number: String) {
+        if self.currentInputViewString.first == "0" && self.currentInputViewString.count == 1 {
+            self.currentInputViewString.removeFirst()
+        }
+        self.currentInputViewString += number
+        self.currentResultString = self.calculate(self.currentInputViewString)
+    }
+    
+    func operatorKeyTapped(_ oper: String) {
+        if oper == Operator.dot.rawValue {
+            if self.currentInputViewString.last != " " && self.currentInputViewString.last != "." && self.operArr.last != Operator.dot.rawValue  {
+                self.currentInputViewString +=  Operator.dot.rawValue
+                self.operArr.append(Operator.dot.rawValue)
+                self.currentResultString = self.calculate(self.currentInputViewString)
             }
         }
         
-        let calculateValueTexts = self.currentInputViewText.split(separator: " ").map { String($0)}
-        var result = Double(calculateValueTexts[0])!
+        else if oper == Operator.delete.rawValue {
+            if self.currentInputViewString.last == " " {
+                self.currentInputViewString = String(self.currentInputViewString.dropLast(3))
+            }  else if  self.currentInputViewString.count == 1 {
+                self.currentInputViewString = "0"
+            } else  {
+                self.currentInputViewString = String(self.currentInputViewString.dropLast(1))
+            }
+            self.currentResultString = self.calculate(self.currentInputViewString)
+        }
+        else {
+            if self.currentInputViewString.last != " " &&  self.currentInputViewString.last != "."{
+                self.currentInputViewString = self.currentInputViewString + " " + oper  + " "
+                self.operArr.append(oper)
+                self.currentResultString = self.calculate(self.currentInputViewString)
+            }
+        }
+    }
+    
+    func calculate(_ k: String) -> String{
+        let inputViewString = self.currentInputViewString.split(separator: " ").map { String($0)}
+        var result = Double(inputViewString[0])!
         var temp = " "
-        for i in 1..<calculateValueTexts.count {
-            if calculateValueTexts[i] != "+" && calculateValueTexts[i] != "-" && calculateValueTexts[i] != "÷" && calculateValueTexts[i] != "×" {
+        for key in 1..<inputViewString.count {
+            if inputViewString[key] != Operator.plus.rawValue && inputViewString[key] != Operator.minus.rawValue && inputViewString[key] != Operator.divide.rawValue && inputViewString[key] != Operator.multiply.rawValue {
                 switch temp {
-                case "+":
-                    result = result + Double(calculateValueTexts[i])!
-                case "-":
-                    result = result - Double(calculateValueTexts[i])!
-                case "×":
-                    result = result * Double(calculateValueTexts[i])!
-                case "÷":
-                    result = result / Double(calculateValueTexts[i])!
+                case Operator.plus.rawValue:
+                    result = result + Double(inputViewString[key])!
+                case Operator.minus.rawValue:
+                    result = result - Double(inputViewString[key])!
+                case Operator.divide.rawValue:
+                    result = result * Double(inputViewString[key])!
+                case Operator.multiply.rawValue:
+                    result = result / Double(inputViewString[key])!
                 default:
                     break
                 }
             } else {
-                temp = calculateValueTexts[i]
+                temp = inputViewString[key]
             }
         }
+        return String(result)
     }
 }
 
