@@ -18,12 +18,6 @@ class CalculatorViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.CalculatorKey.delegate = self
-        self.viewModel.onUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.CalculatorResult.inputOperatorView.text = self.viewModel.currentInputViewText
-            }
-        }
     }
     
     override func setView() {
@@ -44,10 +38,30 @@ class CalculatorViewController: BaseViewController {
             }
         }
     }
+    
+    override func bind() {
+        self.viewModel.onInputViewUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.CalculatorResult.inputrView.text = self.viewModel.currentInputViewString
+            }
+        }
+        
+        self.viewModel.onResultViewUpdated =  { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.CalculatorResult.resultView.text = self.viewModel.currentResultString
+            }
+        }
+    }
 }
 
 extension CalculatorViewController: CalculatorViewDelegate {
     func tappedKey(_ k: String)  {
-        self.viewModel.calculate(k)
+        self.viewModel.numberKeyTapped(k)
+    }
+    
+    func tappedOper(_ k: String) {
+        self.viewModel.operatorKeyTapped(k)
     }
 }
