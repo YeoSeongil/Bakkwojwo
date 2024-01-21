@@ -14,6 +14,7 @@ class CalculatorViewController: BaseViewController {
     let CalculatorKey = CalculatorView()
     let CalculatorResult  = CalculatorResultView()
     let viewModel = CalculatorViewModel()
+    let separatorBar = Custom_Separator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,20 +23,26 @@ class CalculatorViewController: BaseViewController {
     
     override func setView() {
         self.view.backgroundColor = .white
-        [self.CalculatorKey, self.CalculatorResult].forEach { self.view.addSubview($0)}
+        [self.CalculatorKey, self.CalculatorResult, self.separatorBar].forEach { self.view.addSubview($0)}
     }
     
     override func setAutoLayout() {
+        self.CalculatorResult.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.height.equalTo(UIScreen.main.bounds.size.height / 13.0)
+            $0.bottom.equalTo(self.CalculatorKey.snp.top)
+        }
+        
+        self.separatorBar.snp.makeConstraints {
+            $0.top.equalTo(self.CalculatorResult.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
         self.CalculatorKey.snp.makeConstraints {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             $0.width.equalTo(UIScreen.main.bounds.size.width)
             $0.height.equalTo(UIScreen.main.bounds.size.height / 3.0)
-            
-            self.CalculatorResult.snp.makeConstraints {
-                $0.width.equalTo(UIScreen.main.bounds.size.width)
-                $0.height.equalTo(UIScreen.main.bounds.size.height / 13.0)
-                $0.bottom.equalTo(self.CalculatorKey.snp.top)
-            }
         }
     }
     
