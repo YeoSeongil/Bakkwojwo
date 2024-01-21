@@ -8,7 +8,8 @@
 import UIKit
 import SnapKit
 
-class BaseCurrencyView: UIView {
+class BaseCurrencyView: BaseView {
+
     let BaseCurrencyTitleLable: BaseLabel = {
         let label = BaseLabel(text: "기준 통화", textColor: .black, backgroundColor: .clear, font: .h2!)
         return label
@@ -33,19 +34,17 @@ class BaseCurrencyView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setView()
-        self.setAutoLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func setView() {
+    override func setView() {
         [self.BaseCurrencyFlagImageView, self.BaseCurrencyTitleLable, self.BaseCurrencyCountryLabel, self.BaseCurrencyCodeNameLabel].forEach { self.addSubview($0) }
     }
     
-    func setAutoLayout() {
+    override func setAutoLayout() {
         self.BaseCurrencyTitleLable.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-15)
             $0.leading.equalToSuperview()
