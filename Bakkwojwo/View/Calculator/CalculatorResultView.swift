@@ -18,15 +18,7 @@ class CalculatorResultView: BaseView {
         return imageView
     }()
     
-    let inputOperatorTextField: UITextField = {
-        let textField = UITextField()
-        textField.font = .h5
-        textField.textAlignment = .right
-        textField.isUserInteractionEnabled = false
-        return textField
-    }()
-    
-    let inputOperatorView: UILabel = {
+    let inputrView: UILabel = {
         let label = UILabel()
         label.font = .h5
         label.textAlignment = .right
@@ -40,12 +32,12 @@ class CalculatorResultView: BaseView {
         label.font = .h6
         label.textAlignment = .right
         label.textColor = .lightGray
-        label.text = ""
+        label.text = "0"
         return label
     }()
     
     override func setView() {
-        [self.flagImageView, self.inputOperatorView, self.resultView].forEach { self.addSubview($0) }
+        [self.flagImageView, self.inputrView, self.resultView].forEach { self.addSubview($0) }
         self.backgroundColor =  .MidLights
     }
     
@@ -57,7 +49,7 @@ class CalculatorResultView: BaseView {
             $0.centerY.equalToSuperview()
         }
         
-        self.inputOperatorView.snp.makeConstraints {
+        self.inputrView.snp.makeConstraints {
             $0.top.equalTo(self.resultView.snp.bottom).offset(5)
             $0.bottom.equalToSuperview()
             $0.leading.equalTo(self.flagImageView.snp.trailing).offset(20)
