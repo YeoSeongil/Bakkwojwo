@@ -43,14 +43,14 @@ class CalculatorViewController: BaseViewController {
         self.viewModel.onInputViewUpdated = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.CalculatorResult.inputrView.text = self.viewModel.currentInputViewString
+                self.CalculatorResult.inputKeyValueView.text = self.viewModel.currentInputViewString
             }
         }
         
         self.viewModel.onResultViewUpdated =  { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.CalculatorResult.resultView.text = self.viewModel.currentResultString
+                self.CalculatorResult.calculateResultView.text = self.viewModel.currentResultString
             }
         }
     }
