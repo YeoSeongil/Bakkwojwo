@@ -13,7 +13,8 @@ class CalculatorViewController: BaseViewController {
     private var operArr = [String]()
     let CalculatorKey = CalculatorView()
     let CalculatorResult  = CalculatorResultView()
-    let viewModel = CalculatorViewModel()
+    let calViewModel = CalculatorViewModel()
+    let exViewModel = ExchangeRateViewModel()
     let separatorBar = Custom_Separator()
     
     private let mainSectionTitleLabel: BaseLabel = {
@@ -26,14 +27,25 @@ class CalculatorViewController: BaseViewController {
         return label
     }()
     
+    private let calculatorExchangeRateSectionCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CalculatorExchangeRateListCollectionViewCell.self, forCellWithReuseIdentifier: CalculatorExchangeRateListCollectionViewCell.registerId)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.CalculatorKey.delegate = self
+        self.exViewModel.dataLoad()
     }
     
     override func setView() {
         self.view.backgroundColor = .white
-        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.CalculatorKey, self.CalculatorResult, self.separatorBar].forEach { self.view.addSubview($0)}
+        [self.mainSectionTitleLabel, self.mainSectionSubTitleLabel, self.calculatorExchangeRateSectionCollectionView, self.CalculatorKey, self.CalculatorResult, self.separatorBar].forEach { self.view.addSubview($0)}
     }
     
     override func setAutoLayout() {
@@ -47,6 +59,13 @@ class CalculatorViewController: BaseViewController {
             $0.top.equalTo(self.mainSectionTitleLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
+        }
+        
+        self.calculatorExchangeRateSectionCollectionView.snp.makeConstraints {
+            $0.top.equalTo(self.mainSectionSubTitleLabel.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.bottom.equalTo(self.CalculatorResult.snp.top).offset(-15)
         }
         
         self.CalculatorResult.snp.makeConstraints {
@@ -69,24 +88,58 @@ class CalculatorViewController: BaseViewController {
     }
     
     override func bind() {
-        self.viewModel.onInputViewUpdated = { [weak self] in
+        self.calViewModel.onInputViewUpdated = { [weak self] in
             guard let self = self else { return }
-            self.CalculatorResult.inputKeyValueView.text = self.viewModel.currentInputViewString
+            self.CalculatorResult.inputKeyValueView.text = self.calViewModel.currentInputViewString
         }
         
-        self.viewModel.onResultViewUpdated =  { [weak self] in
+        self.calViewModel.onResultViewUpdated =  { [weak self] in
             guard let self = self else { return }
-            self.CalculatorResult.calculateResultView.text = self.viewModel.currentResultString
+            self.CalculatorResult.calculateResultView.text = self.calViewModel.currentResultString
+        }
+        
+        self.exViewModel.onUpdated = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.exViewModel.dataLoad()
+                self.mainSectionSubTitleLabel.text = "\(self.exViewModel.exchangeRateModel[0].date) \(self.exViewModel.exchangeRateModel[0].time)"
+                self.calculatorExchangeRateSectionCollectionView.delegate = self
+                self.calculatorExchangeRateSectionCollectionView.dataSource = self
+                self.calculatorExchangeRateSectionCollectionView.reloadData()
+            }
         }
     }
 }
 
 extension CalculatorViewController: CalculatorViewDelegate {
     func tappedKey(_ k: String)  {
-        self.viewModel.numberKeyTapped(k)
+        self.calViewModel.numberKeyTapped(k)
     }
     
     func tappedOper(_ k: String) {
-        self.viewModel.operatorKeyTapped(k)
+        self.calViewModel.operatorKeyTapped(k)
+    }
+}
+
+extension CalculatorViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat = collectionView.bounds.width
+        let hegiht: CGFloat = 50
+        return CGSize(width: width, height: hegiht)
+    }
+}
+
+extension CalculatorViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.exViewModel.exchangeRateModel.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalculatorExchangeRateListCollectionViewCell.registerId, for: indexPath) as? CalculatorExchangeRateListCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let data = self.exViewModel.exchangeRateModel[indexPath.row]
+        cell.setData(data)
+        return cell
     }
 }
