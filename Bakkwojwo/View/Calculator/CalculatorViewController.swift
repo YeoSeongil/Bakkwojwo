@@ -141,6 +141,10 @@ extension CalculatorViewController: UICollectionViewDataSource {
         }
         let data = self.exViewModel.exchangeRateModel[indexPath.row]
         cell.setData(data)
+        
+        let calcData: Double = Double(self.calViewModel.currentResultString)! / data.basePrice
+        let roundData = round(calcData * pow(10, 3)) / pow(10, 3)
+        cell.basePriceLabel.text = "\(roundData)\(data.currencyName)"
         return cell
     }
 }
