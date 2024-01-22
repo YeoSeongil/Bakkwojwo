@@ -85,6 +85,6 @@ class CalculatorExchangeRateListCollectionViewCell: UICollectionViewCell {
         self.flagImageView.image = UIImage(named: data.currencyCode)
         self.countryLabel.text = "\(data.country) \(data.currencyName)"
         self.currencyCodeNameLabel.text = data.currencyCode
-        self.basePriceLabel.text = "\(data.basePrice)"
+        self.basePriceLabel.text = "0"
     }
 }
