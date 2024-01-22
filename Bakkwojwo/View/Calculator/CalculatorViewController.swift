@@ -65,21 +65,22 @@ class CalculatorViewController: BaseViewController {
             $0.top.equalTo(self.mainSectionSubTitleLabel.snp.bottom).offset(15)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
-            $0.bottom.equalTo(self.CalculatorResult.snp.top).offset(-15)
-        }
-        
-        self.CalculatorResult.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(UIScreen.main.bounds.size.height / 13.0)
-            $0.bottom.equalTo(self.CalculatorKey.snp.top)
+            $0.bottom.equalTo(self.separatorBar.snp.top).offset(-15)
         }
         
         self.separatorBar.snp.makeConstraints {
-            $0.top.equalTo(self.CalculatorResult.snp.bottom).offset(5)
+            $0.top.equalTo(self.calculatorExchangeRateSectionCollectionView.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
         
+        self.CalculatorResult.snp.makeConstraints {
+            $0.top.equalTo(self.separatorBar.snp.top)
+            $0.width.equalTo(UIScreen.main.bounds.size.width)
+            $0.height.equalTo(UIScreen.main.bounds.size.height / 13.0)
+            $0.bottom.equalTo(self.CalculatorKey.snp.top)
+        }
+
         self.CalculatorKey.snp.makeConstraints {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             $0.width.equalTo(UIScreen.main.bounds.size.width)
