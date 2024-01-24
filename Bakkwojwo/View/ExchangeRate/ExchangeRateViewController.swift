@@ -17,7 +17,7 @@ class ExchangeRateViewController: BaseViewController{
     let Division = ExchangeRateDivisionView()
     
     var isCheckedArray: [Bool] = []
-    
+
     private let mainSectionTitleLabel: BaseLabel = {
         let label = BaseLabel(text: "국가별 환율", textColor: .black, backgroundColor: .white, font: .mainTitle2!)
         return label
@@ -74,6 +74,9 @@ class ExchangeRateViewController: BaseViewController{
                 self.exchangeRateSectionCollectionView.delegate = self
                 self.exchangeRateSectionCollectionView.dataSource = self
                 self.exchangeRateSectionCollectionView.reloadData()
+                self.isCheckedArray = self.viewModel.exchangeRateModel.map {
+                            $0.isChecked
+                }
             }
         }
     }
@@ -176,12 +179,8 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
         cell.isHiddenAnimation(state: self.exchangeRateSectionEditButton.isChecked)
         cell.setData(data)
         cell.delegate = self
-        
-        isCheckedArray = self.viewModel.exchangeRateModel.map {
-            $0.isChecked
-        }
 
-        cell.checkBox.isChecked = isCheckedArray[indexPath.row] == true ? true : false
+        cell.checkBox.isChecked = self.isCheckedArray[indexPath.row] == true ? true : false
         return cell
     }
 }
@@ -189,6 +188,7 @@ extension ExchangeRateViewController: UICollectionViewDataSource {
 extension ExchangeRateViewController: ExchangeRateSectionCollectionViewDelegate {
     func checkBoxButtonTapped(_ cell: ExchangeRateSectionCollectionViewCell, _ button: CheckBox) {
         guard let indexPath = self.exchangeRateSectionCollectionView.indexPath(for: cell) else { return }
+        
         isCheckedArray[indexPath.row] = button.isChecked == true ? true : false
     }
 }
