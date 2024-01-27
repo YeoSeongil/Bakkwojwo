@@ -17,7 +17,7 @@ let countryNameItem: [String] = ["USD", "JPY", "CNY", "EUR", "GBP", "RUB", "HKD"
 let countryModelItem: [String: CountryModel] = [
     // Asia
     "KRW" : CountryModel(countryName: "대한민국", currencyUnit: "원(₩)"),
-    "JPY" : CountryModel(countryName: "일본", currencyUnit: "엔(￥)"),
+    "JPY" : CountryModel(countryName: "일본", currencyUnit: "100엔(￥)"),
     "CNY" : CountryModel(countryName: "중국", currencyUnit: "위안(¥)"),
     "HKD" : CountryModel(countryName: "홍콩", currencyUnit: "달러(HK$)"),
     "THB" : CountryModel(countryName: "태국", currencyUnit: "바트(฿)"),
