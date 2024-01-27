@@ -152,7 +152,8 @@ extension CalculatorViewController: UICollectionViewDataSource {
         let result: String = formatter.string(from: NSNumber(value: calcData))!
         if data.currencyCode == "JPY" {
             let jpyCalc: String = formatter.string(from: NSNumber(value: calcData * 100))!
-            cell.basePriceLabel.text = "\(jpyCalc)\(data.currencyName)"
+            cell.basePriceLabel.text = "\(jpyCalc)엔(￥)"
+            cell.countryLabel.text = "일본 엔(￥)"
         } else {
             cell.basePriceLabel.text = "\(result)\(data.currencyName)"
         }
