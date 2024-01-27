@@ -147,7 +147,11 @@ extension CalculatorViewController: UICollectionViewDataSource {
         
         let calcData: Double = Double(self.calViewModel.currentResultString)! / data.basePrice
         let roundData = round(calcData * pow(10, 3)) / pow(10, 3)
-        cell.basePriceLabel.text = "\(roundData)\(data.currencyName)"
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        let result: String = formatter.string(from: NSNumber(value: roundData))!
+        cell.basePriceLabel.text = "\(result)\(data.currencyName)"
         return cell
     }
 }
