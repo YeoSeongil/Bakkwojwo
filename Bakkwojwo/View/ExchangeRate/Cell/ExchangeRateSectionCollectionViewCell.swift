@@ -57,11 +57,6 @@ class ExchangeRateSectionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setView()
