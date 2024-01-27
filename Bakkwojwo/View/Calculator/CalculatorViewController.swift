@@ -146,13 +146,13 @@ extension CalculatorViewController: UICollectionViewDataSource {
         cell.setData(data)
         
         let calcData: Double = Double(self.calViewModel.currentResultString)! / data.basePrice
-        let roundData = round(calcData * pow(10, 3)) / pow(10, 3)
         
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        let result: String = formatter.string(from: NSNumber(value: roundData))!
+        let result: String = formatter.string(from: NSNumber(value: calcData))!
         if data.currencyCode == "JPY" {
-            cell.basePriceLabel.text = "\(Double(result)!*100)\(data.currencyName)"
+            let jpyCalc: String = formatter.string(from: NSNumber(value: calcData * 100))!
+            cell.basePriceLabel.text = "\(jpyCalc)\(data.currencyName)"
         } else {
             cell.basePriceLabel.text = "\(result)\(data.currencyName)"
         }
