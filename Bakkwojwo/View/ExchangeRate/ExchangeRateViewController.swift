@@ -68,8 +68,8 @@ class ExchangeRateViewController: BaseViewController{
     
    override func bind() {
         self.viewModel.onUpdated = { [weak self] in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                guard let self = self else { return }
                 self.mainSectionSubTitleLabel.text = "\(self.viewModel.exchangeRateModel[0].date) \(self.viewModel.exchangeRateModel[0].time)"
                 self.exchangeRateSectionCollectionView.delegate = self
                 self.exchangeRateSectionCollectionView.dataSource = self
