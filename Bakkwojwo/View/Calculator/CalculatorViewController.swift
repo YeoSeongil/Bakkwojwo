@@ -151,7 +151,11 @@ extension CalculatorViewController: UICollectionViewDataSource {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         let result: String = formatter.string(from: NSNumber(value: roundData))!
-        cell.basePriceLabel.text = "\(result)\(data.currencyName)"
+        if data.currencyCode == "JPY" {
+            cell.basePriceLabel.text = "\(Double(result)!*100)\(data.currencyName)"
+        } else {
+            cell.basePriceLabel.text = "\(result)\(data.currencyName)"
+        }
         return cell
     }
 }
