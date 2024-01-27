@@ -96,7 +96,10 @@ class CalculatorViewController: BaseViewController {
         
         self.calViewModel.onResultViewUpdated =  { [weak self] in
             guard let self = self else { return }
-            self.CalculatorResult.calculateResultView.text = "\(self.calViewModel.currentResultString)원"
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            let result: String = formatter.string(from: NSNumber(value: Double(self.calViewModel.currentResultString)!))!
+            self.CalculatorResult.calculateResultView.text = "\(result)원"
         }
         
         self.exViewModel.onUpdated = { [weak self] in
