@@ -29,4 +29,9 @@ extension UIFont {
     static let h4 = UIFont(name: Pretendard.light.rawValue, size: 10)
     static let h5 = UIFont(name: Pretendard.light.rawValue, size: 23)
     static let h6 = UIFont(name: Pretendard.light.rawValue, size: 14)
+    
+    static let popUpTitle  = UIFont(name: Pretendard.bold.rawValue, size: 15)
+    static let popUpMessage  = UIFont(name: Pretendard.light.rawValue, size: 13)
+    static let popUpButton  = UIFont(name: Pretendard.light.rawValue, size: 13)
+    
 }
