@@ -12,7 +12,7 @@ class ExchangeRateViewModel {
     private let repository = APIManager.shared
     let service = Service()
     var onUpdated: () -> Void = {}
-
+    
     var exchangeRateModel: [ExchangeRateModel] = [ExchangeRateModel]()
     {
         didSet {
@@ -40,18 +40,23 @@ class ExchangeRateViewModel {
         }
     }
     
-    func myCurrencyUpdate(_ item: [Bool]) {
+    func myCurrencyUpdate(_ item: [Bool], onError: (()->Void)? = nil ) {
         let myCurrency = realm.read(MyCurrencyModel.self)
-        realm.update(MyCurrencyModel.self) {_ in
-            myCurrency.indices.filter {item[$0] == false}.forEach{
-                myCurrency[$0].isCheck = false
-            }
-            myCurrency.indices.filter {item[$0] == true}.forEach{
-                myCurrency[$0].isCheck = true
+        let countedItemArray = NSCountedSet(array: item)
+        if countedItemArray.count(for: false) == item.count {
+            onError?()
+        } else {
+            realm.update(MyCurrencyModel.self) {_ in
+                myCurrency.indices.filter {item[$0] == false}.forEach{
+                    myCurrency[$0].isCheck = false
+                }
+                myCurrency.indices.filter {item[$0] == true}.forEach{
+                    myCurrency[$0].isCheck = true
+                }
             }
         }
     }
-
+    
     fileprivate func pirntRealmURL() {
         realm.getLocalRealmURL()
     }
