@@ -36,39 +36,41 @@ class CalculatorViewModel {
     }
     
     func numberKeyTapped(_ number: String) {
-        if self.currentInputViewString.first == "0" && self.currentInputViewString.count == 1 {
-            self.currentInputViewString.removeFirst()
+        if currentInputViewString.count <= 19 {
+            if self.currentInputViewString.first == "0" && self.currentInputViewString.count == 1 {
+                self.currentInputViewString.removeFirst()
+            }
+            self.currentInputViewString += number
+            self.currentResultString = self.calculate(self.currentInputViewString)
         }
-        self.currentInputViewString += number
-        self.currentResultString = self.calculate(self.currentInputViewString)
     }
     
     func operatorKeyTapped(_ oper: String) {
-        if oper == Operator.dot.rawValue {
-            if self.currentInputViewString.last != " " && self.currentInputViewString.last != "." && self.operArr.last != Operator.dot.rawValue  {
-                self.currentInputViewString +=  Operator.dot.rawValue
-                self.operArr.append(Operator.dot.rawValue)
+            if oper == Operator.dot.rawValue {
+                if self.currentInputViewString.last != " " && self.currentInputViewString.last != "." && self.operArr.last != Operator.dot.rawValue  {
+                    self.currentInputViewString +=  Operator.dot.rawValue
+                    self.operArr.append(Operator.dot.rawValue)
+                    self.currentResultString = self.calculate(self.currentInputViewString)
+                }
+            }
+            
+            else if oper == Operator.delete.rawValue {
+                if self.currentInputViewString.last == " " {
+                    self.currentInputViewString = String(self.currentInputViewString.dropLast(3))
+                }  else if  self.currentInputViewString.count == 1 {
+                    self.currentInputViewString = "0"
+                } else  {
+                    self.currentInputViewString = String(self.currentInputViewString.dropLast(1))
+                }
                 self.currentResultString = self.calculate(self.currentInputViewString)
             }
-        }
-        
-        else if oper == Operator.delete.rawValue {
-            if self.currentInputViewString.last == " " {
-                self.currentInputViewString = String(self.currentInputViewString.dropLast(3))
-            }  else if  self.currentInputViewString.count == 1 {
-                self.currentInputViewString = "0"
-            } else  {
-                self.currentInputViewString = String(self.currentInputViewString.dropLast(1))
+            else {
+                if self.currentInputViewString.last != " " &&  self.currentInputViewString.last != "."{
+                    self.currentInputViewString = self.currentInputViewString + " " + oper  + " "
+                    self.operArr.append(oper)
+                    self.currentResultString = self.calculate(self.currentInputViewString)
+                }
             }
-            self.currentResultString = self.calculate(self.currentInputViewString)
-        }
-        else {
-            if self.currentInputViewString.last != " " &&  self.currentInputViewString.last != "."{
-                self.currentInputViewString = self.currentInputViewString + " " + oper  + " "
-                self.operArr.append(oper)
-                self.currentResultString = self.calculate(self.currentInputViewString)
-            }
-        }
     }
     
     func calculate(_ k: String) -> String{
@@ -93,7 +95,7 @@ class CalculatorViewModel {
                 temp = inputViewString[key]
             }
         }
-        return String(result)
+        return String(result.FormattingToFirstDecimalPlace)
     }
 }
 
