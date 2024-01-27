@@ -85,7 +85,9 @@ class ExchangeRateViewController: BaseViewController{
         self.exchangeRateSectionEditButton.onUpdated = { [weak self] in
             guard let self = self else {return}
             if self.exchangeRateSectionEditButton.isChecked == false {
-                self.viewModel.myCurrencyUpdate(isCheckedArray)
+                self.viewModel.myCurrencyUpdate(isCheckedArray, onError: {
+                    self.showPopUp(titleText: "오류", message: "한 개 이상의 국가는 반드시 체크해야 합니다.", buttonText: "확인")
+                })
                 self.viewModel.dataLoad()
             } else {
                 self.viewModel.allDataLoad()
@@ -157,7 +159,6 @@ class ExchangeRateViewController: BaseViewController{
     }
 }
 
-// - TODO - 셀 재사용 시 발생하는 문제 해결 ➡️ 체크박스 클릭 시 다른 셀의 체크박스도 체크 되는 현상 해결
 extension ExchangeRateViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = collectionView.bounds.width
